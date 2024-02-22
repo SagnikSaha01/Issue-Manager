@@ -119,5 +119,6 @@ public class Issue {
 			String getStateName();
 
 		}
+		public enum IssueType {ENHANCEMENT, BUG}
 	
 }

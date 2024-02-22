@@ -24,4 +24,13 @@ public class Command {
 	public String getNote() {
 		return note;
 	}
+	/**
+	 * Represents the constants for the Issue states
+	 */
+	public enum Resolution { FIXED, DUPLICATE, WONTFIX, WORKSFORME }
+	/**
+	 * Represents the constant values possible for Commands
+	 */
+	public enum CommandValue { ASSIGN, CONFIRM, RESOLVE, VERIFY, REOPEN }
+
 }
