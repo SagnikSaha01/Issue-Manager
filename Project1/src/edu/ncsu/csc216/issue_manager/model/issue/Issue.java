@@ -9,7 +9,7 @@ public class Issue {
 	private boolean confirmed;
 	private ArrayList<String> notes;
 	
-	//public final String NEW_NAME = "New";
+	public final String NEW_NAME = "New";
 	
 	
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
