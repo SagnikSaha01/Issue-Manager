@@ -31,6 +31,7 @@ public class Issue {
 	private boolean confirmed;
 	/** List of notes in an array list */
 	private ArrayList<String> notes;
+	
 	/**
 	 * Constructor for an issue object
 	 * @param issueId the id of the issue
@@ -39,7 +40,8 @@ public class Issue {
 	 * @param note any notes associated with the issue
 	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
-		this.issueId = issueId;
+		setIssueId(issueId);
+		
 		
 	}
 	/**
@@ -53,8 +55,15 @@ public class Issue {
 	 * @param resolution resolution state of the issue
 	 * @param notes any additional notes for the issue
 	 */
-	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String>notes) {
-		this.issueId = issueId;
+	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
+		setIssueId(issueId);
+		setOwner(owner);
+		setIssueType(issueType);
+		setNotes(notes);
+		setSummary(summary);
+		setState(state);
+		setConfirmed(confirmed);
+		setResolution(resolution);
 	}
 
 	/**
@@ -161,7 +170,7 @@ public class Issue {
 	 */
 	public boolean isConfirmed() {
 		// TODO Auto-generated method stub
-		return true;
+		return confirmed;
 	}
 	/**
 	 * Returns the resolution of the issue
@@ -226,7 +235,7 @@ public class Issue {
 		/**
 		 * Class that represents the Verifying state of the Issue Manager 
 		 */
-		public class VerifyingState{
+		public class VerifyingState implements IssueState {
 
 			/**
 			 * Updates the current state based on given command
@@ -248,7 +257,7 @@ public class Issue {
 		/**
 		 * Class that represents the Working state of Issue Manager
 		 */
-		public class WorkingState{
+		public class WorkingState implements IssueState {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
@@ -270,7 +279,7 @@ public class Issue {
 		/**
 		 * Class that represents the New state of Issue Manager
 		 */
-		public class NewState {
+		public class NewState implements IssueState {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
@@ -292,7 +301,7 @@ public class Issue {
 		/**
 		 * Class that represents the Confirmed state of Issue Manager
 		 */
-		public class ConfirmedState{
+		public class ConfirmedState implements IssueState {
 
 			/**
 			 * Updates the current state based on given command
@@ -315,7 +324,7 @@ public class Issue {
 		/**
 		 * Class that represents the Closed state of the Issue Manager
 		 */
-		public class ClosedState{
+		public class ClosedState implements IssueState {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state

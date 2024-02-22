@@ -13,7 +13,7 @@ public class IssueWriter {
 	 * @param fileName name of the file that stores the data
 	 * @param issueList list of the issues that will be saved
 	 */
-	public static void writeIssuesToFile(String fileName, List<Issue>issueList) {
+	public static void writeIssuesToFile(String fileName, List<Issue> issueList) {
 		
 	}
 }

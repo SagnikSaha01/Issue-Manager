@@ -4,15 +4,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import edu.ncsu.csc216.issue_manager.model.issue.Issue;
-
+/**
+ * Tests for the IssueReader class
+ */
 public class IssueReaderTest {
+	/**
+	 * Testing the readIssuesFromFile method
+	 */
 	@Test
 	public void testReadIssuesFromFile(){
 		fail();
 	}
+	/**
+	 * Testing the processIssue method
+	 */
 	@Test
-    private void tesProcessIssue() {
+    private void testProcessIssue() {
     	fail();
     }
 }

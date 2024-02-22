@@ -13,7 +13,7 @@ public class IssueReader {
 	 * @return array list with the stored issues
 	 */
 	public static ArrayList<Issue> readIssuesFromFile(String fileName){
-		
+		processIssue(fileName);
 		return null;
 	}
 	/**

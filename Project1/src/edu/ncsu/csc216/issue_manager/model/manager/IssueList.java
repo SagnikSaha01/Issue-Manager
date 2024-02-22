@@ -12,6 +12,12 @@ public class IssueList {
 	/** Tracks what the next IssueId should be */
 	private int counter;
 	/**
+	 * Constructor for the issue list object
+	 */
+	public IssueList() {
+		counter = 0;
+	}
+	/**
 	 * Adds an issue to the IssueList
 	 * @param issueType whether it is a bug or enhancement
 	 * @param summary summary of the issue
@@ -19,14 +25,15 @@ public class IssueList {
 	 * @return the Id of the added issue
 	 */
 	public int addIssue(IssueType issueType, String summary, String note) {
-		return 0;
+		counter++;
+		return counter;
 	}
 	/**
 	 * Adds the first issue from the collection of issues
 	 * @param issues total collection of issues 
 	 */
 	public void addIssues(List<Issue> issues) {
-		
+		addIssue();
 	}
 	/**
 	 * Helps check for any duplciate issues that are already added
