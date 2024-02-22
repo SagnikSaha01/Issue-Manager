@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.issue_manager.model.io;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 /**
@@ -12,7 +13,7 @@ public class IssueWriter {
 	 * @param fileName name of the file that stores the data
 	 * @param issueList list of the issues that will be saved
 	 */
-	public static void writeIssuesToFile(String fileName, ArrayList<Issue>issueList) {
+	public static void writeIssuesToFile(String fileName, List<Issue>issueList) {
 		
 	}
 }
