@@ -58,6 +58,7 @@ public class Issue {
 	}
 
 	/**
+	 * Returns the id of the issue
 	 * @return the issueId
 	 */
 	public int getIssueId() {
@@ -65,24 +66,42 @@ public class Issue {
 	}
 
 	/**
+	 * Sets the Id of the issue
 	 * @param issueId the issueId to set
 	 */
 	private void setIssueId(int issueId) {
 		this.issueId = issueId;
 	}
+	/**
+	 * Sets the state of the issue
+	 * @param state the state to be set
+	 */
 	private void setState(String state) {
 		
 	}
+	/**
+	 * Sets the type of issue
+	 * @param issueType the type of issue to be set
+	 */
 	private void setIssueType(String issueType) {
 		
 	}
+	/**
+	 * Sets if the issue is confirmed
+	 * @param confirmed sets whether the issue is confirmed or not
+	 */
 	private void setConfirmed(boolean confirmed) {
 		this.confirmed = confirmed;
 	}
+	/**
+	 * Sets the resolution of the issue
+	 * @param resolution the resolution to be set
+	 */
 	private void setResolution(String resolution) {
 		
 	}
 	/**
+	 * Returns the issue summary
 	 * @return the summary
 	 */
 	public String getSummary() {
@@ -90,6 +109,7 @@ public class Issue {
 	}
 
 	/**
+	 * Sets the summary of the issue
 	 * @param summary the summary to set
 	 */
 	private void setSummary(String summary) {
@@ -97,6 +117,7 @@ public class Issue {
 	}
 
 	/**
+	 * Returns the issue owner
 	 * @return the owner
 	 */
 	public String getOwner() {
@@ -104,6 +125,7 @@ public class Issue {
 	}
 
 	/**
+	 * Sets the owner of the issue
 	 * @param owner the owner to set
 	 */
 	private void setOwner(String owner) {
@@ -111,6 +133,7 @@ public class Issue {
 	}
 
 	/**
+	 * Returns all of the issue notes
 	 * @return the notes
 	 */
 	public ArrayList<String> getNotes() {
@@ -118,36 +141,56 @@ public class Issue {
 	}
 
 	/**
+	 * Sets the notes to the issue
 	 * @param notes the notes to set
 	 */
 	private void setNotes(ArrayList<String> notes) {
 		this.notes = notes;
 	}
+	/**
+	 * Returns the type of the issue
+	 * @return enhancement or bug based on the type 
+	 */
 	public String getIssueType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/**
+	 * Returns if the issue is confirmed or not
+	 * @return true or false based on if the issue is confirmed or not
+	 */
 	public boolean isConfirmed() {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+	/**
+	 * Returns the resolution of the issue
+	 * @return the resolution
+	 */
 	public String getResolution() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/**
+	 * Returns the name of the state
+	 * @return state name
+	 */
 	public String getStateName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/**
+	 * Returns the note of an issue
+	 * @return the issue note
+	 */
 	public String getNotesString() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	/**
+	 * Updates an issue
+	 * @param c command that helps update the issue
+	 */
 	public void update(Command c) {
 		
 	}
@@ -183,7 +226,7 @@ public class Issue {
 		/**
 		 * Represents the constant values for the types of issues
 		 */
-		public enum IssueType {ENHANCEMENT, BUG}
+		public enum IssueType { ENHANCEMENT, BUG }
 		
 
 		
