@@ -43,15 +43,15 @@ public class Issue {
 		
 	}
 	/**
-	 * 
-	 * @param issueId
-	 * @param state
-	 * @param issueType
-	 * @param summary
-	 * @param owner
-	 * @param confirmed
-	 * @param resolution
-	 * @param notes
+	 * Alternative constructor for an issue obejct
+	 * @param issueId Id of the issue
+	 * @param state current state of the issue
+	 * @param issueType whether it is a bug or enhancement
+	 * @param summary summary of the issue
+	 * @param owner assigned owner of the issue
+	 * @param confirmed if the issue was confirmed or not
+	 * @param resolution resolution state of the issue
+	 * @param notes any additional notes for the issue
 	 */
 	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String>notes) {
 		this.issueId = issueId;
