@@ -10,6 +10,7 @@ public class Issue {
 	public static final String NEW_NAME = "New";
 	public static final String WORKING_NAME = "Working";
 	public static final String CONFIRMED_NAME = "Confirmed";
+	public static final String I_ENHANCEMENT = "Enhancement";
 	public static final String I_BUG = "Bug";
 	
 	private int issueId;
@@ -96,7 +97,34 @@ public class Issue {
 	private void setNotes(ArrayList<String> notes) {
 		this.notes = notes;
 	}
+	public String getIssueType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String isConfirmed() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getResolution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getStateName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getNotesString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
+	public void update(Command c) {
+		
+	}
 
 	/**
 		 * Interface for states in the Issue State Pattern.  All 
@@ -127,30 +155,7 @@ public class Issue {
 
 		}
 		public enum IssueType {ENHANCEMENT, BUG}
-		public String getIssueType() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public String isConfirmed() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public String getResolution() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public String getStateName() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public String getNotesString() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		
 
 		
 	
