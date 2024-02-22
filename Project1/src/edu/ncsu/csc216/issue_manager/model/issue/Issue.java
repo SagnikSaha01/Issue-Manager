@@ -31,15 +31,28 @@ public class Issue {
 	private boolean confirmed;
 	/** List of notes in an array list */
 	private ArrayList<String> notes;
-	
-	
-	
-	
+	/**
+	 * Constructor for an issue object
+	 * @param issueId the id of the issue
+	 * @param issueType whether it is a bug or enhancement
+	 * @param summary summary of the issue
+	 * @param note any notes associated with the issue
+	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
 		this.issueId = issueId;
 		
 	}
-	
+	/**
+	 * 
+	 * @param issueId
+	 * @param state
+	 * @param issueType
+	 * @param summary
+	 * @param owner
+	 * @param confirmed
+	 * @param resolution
+	 * @param notes
+	 */
 	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String>notes) {
 		this.issueId = issueId;
 	}
