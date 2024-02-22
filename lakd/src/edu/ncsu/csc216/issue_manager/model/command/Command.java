@@ -2,6 +2,7 @@ package edu.ncsu.csc216.issue_manager.model.command;
 /**
  * Class for Command objects which are responsible for leading to a transition
  */
+import edu.ncsu.csc216.issue_manager.model.command.CommandValue;
 public class Command {
 	/**Id of the Owner*/
 	private String ownerId;
