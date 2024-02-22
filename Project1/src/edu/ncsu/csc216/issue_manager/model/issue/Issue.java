@@ -180,6 +180,9 @@ public class Issue {
 			String getStateName();
 
 		}
+		/**
+		 * Represents the constant values for the types of issues
+		 */
 		public enum IssueType {ENHANCEMENT, BUG}
 		
 

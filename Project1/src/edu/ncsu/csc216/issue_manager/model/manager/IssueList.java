@@ -18,7 +18,7 @@ public class IssueList {
 	 * @param note any additional notes for the issue
 	 * @return the Id of the added issue
 	 */
-	public int addIssue(IssueType issueType,String summary,String note) {
+	public int addIssue(IssueType issueType, String summary, String note) {
 		return 0;
 	}
 	/**
