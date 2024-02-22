@@ -3,10 +3,18 @@ package edu.ncsu.csc216.issue_manager.model.command;
  * Class for the command object which is responsible for transitions between states
  */
 public class Command {
-	/**Id of owner of the issue*/
+	/** Id of owner of the issue */
 	private String ownerId;
-	/**Note of the issue*/
+	/** Note of the issue */
 	private String note;
+	/** Constant for the fixed resolution */
+	public static final String R_FIXED = "Fixed";
+	/** Constant for the duplicate resolution */
+	public static final String R_DUPLICATE = "Duplicate";
+	/** Constant for the wont fix resolution */
+	public static final String R_WONTFIX = "WontFix";
+	/** Constant for the works for me resolution */
+	public static final String R_WORKSFORME = "WorksForMe";
 	/**
 	 * Constructor for a command object
 	 * @param c the command value

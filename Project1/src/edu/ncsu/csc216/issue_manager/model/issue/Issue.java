@@ -3,20 +3,33 @@ package edu.ncsu.csc216.issue_manager.model.issue;
 import java.util.ArrayList;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
-
+/**
+ * Class for managing and modifying Issue objects 
+ */
 public class Issue {
+	/** Constant for the closed state */
 	public static final String CLOSED_NAME = "Closed";
+	/** Constant for the verifying state */
 	public static final String VERIFYING_NAME = "Verifying";
+	/** Constant for the new state */
 	public static final String NEW_NAME = "New";
+	/** Constant for the working state */
 	public static final String WORKING_NAME = "Working";
+	/** Constant for the confirmed state */
 	public static final String CONFIRMED_NAME = "Confirmed";
+	/** Constant for the enhancement issue type */
 	public static final String I_ENHANCEMENT = "Enhancement";
+	/** Constant for the bug issue type */
 	public static final String I_BUG = "Bug";
-	
+	/** The id of a given issue */
 	private int issueId;
+	/** Summary of an issue */
 	private String summary;
+	/** Owner of an issue */
 	private String owner;
+	/** Whether the issue is confirmed or not*/
 	private boolean confirmed;
+	/** List of notes in an array list */
 	private ArrayList<String> notes;
 	
 	
