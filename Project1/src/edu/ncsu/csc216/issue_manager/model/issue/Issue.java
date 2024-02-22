@@ -2,6 +2,8 @@ package edu.ncsu.csc216.issue_manager.model.issue;
 
 import java.util.ArrayList;
 
+import edu.ncsu.csc216.issue_manager.model.command.Command;
+
 public class Issue {
 	private int issueId;
 	private String summary;
@@ -87,5 +89,35 @@ public class Issue {
 	private void setNotes(ArrayList<String> notes) {
 		this.notes = notes;
 	}
+	
+
+	/**
+		 * Interface for states in the Issue State Pattern.  All 
+		 * concrete issue states must implement the IssueState interface.
+		 * The IssueState interface should be a private interface of the 
+		 * Issue class.
+		 * 
+		 * @author Dr. Sarah Heckman (sarah_heckman@ncsu.edu) 
+		 */
+		private interface IssueState {
+			
+			/**
+			 * Update the Issue based on the given Command.
+			 * An UnsupportedOperationException is throw if the Command
+			 * is not a valid action for the given state.  
+			 * @param command Command describing the action that will update the Issue's
+			 * state.
+			 * @throws UnsupportedOperationException if the Command is not a valid action
+			 * for the given state.
+			 */
+			void updateState(Command command);
+			
+			/**
+			 * Returns the name of the current state as a String.
+			 * @return the name of the current state as a String.
+			 */
+			String getStateName();
+
+		}
 	
 }
