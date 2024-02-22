@@ -224,6 +224,116 @@ public class Issue {
 
 		}
 		/**
+		 * Class that represents the Verifying state of the Issue Manager 
+		 */
+		public class VerifyingState{
+
+			/**
+			 * Updates the current state based on given command
+			 * @param c command that is responsible for updating the state
+			 */
+			public void updateState(Command c) {
+				// TODO Auto-generated method stub
+				
+			}
+			/**
+			 * Returns the name of the State
+			 * @return state name
+			 */
+			public String getStateName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		}
+		/**
+		 * Class that represents the Working state of Issue Manager
+		 */
+		public class WorkingState{
+			/**
+			 * Updates the current state based on given command
+			 * @param c command that is responsible for updating the state
+			 */
+			public void updateState(Command c) {
+				// TODO Auto-generated method stub
+				
+			}
+			/**
+			 * Returns the name of the State
+			 * @return state name
+			 */
+			public String getStateName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+		}
+		/**
+		 * Class that represents the New state of Issue Manager
+		 */
+		public class NewState {
+			/**
+			 * Updates the current state based on given command
+			 * @param c command that is responsible for updating the state
+			 */
+			public void updateState(Command c) {
+				// TODO Auto-generated method stub
+				
+			}
+			/**
+			 * Returns the name of the State
+			 * @return state name
+			 */
+			public String getStateName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+		}
+		/**
+		 * Class that represents the Confirmed state of Issue Manager
+		 */
+		public class ConfirmedState{
+
+			/**
+			 * Updates the current state based on given command
+			 * @param c command that is responsible for updating the state
+			 */
+
+			public void updateState(Command c) {
+				// TODO Auto-generated method stub
+				
+			}
+			/**
+			 * Returns the name of the State
+			 * @return state name
+			 */
+			public String getStateName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		}
+		/**
+		 * Class that represents the Closed state of the Issue Manager
+		 */
+		public class ClosedState{
+			/**
+			 * Updates the current state based on given command
+			 * @param c command that is responsible for updating the state
+			 */
+			public void updateState(Command c) {
+				// TODO Auto-generated method stub
+				
+			}
+			/**
+			 * Returns the name of the State
+			 * @return state name
+			 */
+			public String getStateName() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		}
+		/**
 		 * Represents the constant values for the types of issues
 		 */
 		public enum IssueType { ENHANCEMENT, BUG }
