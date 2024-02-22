@@ -5,13 +5,20 @@ import java.util.ArrayList;
 import edu.ncsu.csc216.issue_manager.model.command.Command;
 
 public class Issue {
+	public static final String CLOSED_NAME = "Closed";
+	public static final String VERIFYING_NAME = "Verifying";
+	public static final String NEW_NAME = "New";
+	public static final String WORKING_NAME = "Working";
+	public static final String CONFIRMED_NAME = "Confirmed";
+	public static final String I_BUG = "Bug";
+	
 	private int issueId;
 	private String summary;
 	private String owner;
 	private boolean confirmed;
 	private ArrayList<String> notes;
 	
-	public final String NEW_NAME = "New";
+	
 	
 	
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
@@ -120,5 +127,31 @@ public class Issue {
 
 		}
 		public enum IssueType {ENHANCEMENT, BUG}
+		public String getIssueType() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public String isConfirmed() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public String getResolution() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public String getStateName() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public String getNotesString() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		
 	
 }
