@@ -102,9 +102,9 @@ public class Issue {
 		return null;
 	}
 
-	public String isConfirmed() {
+	public boolean isConfirmed() {
 		// TODO Auto-generated method stub
-		return null;
+		return true;
 	}
 
 	public String getResolution() {
