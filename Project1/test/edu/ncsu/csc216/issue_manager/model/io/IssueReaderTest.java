@@ -19,7 +19,7 @@ public class IssueReaderTest {
 	 * Testing the processIssue method
 	 */
 	@Test
-    private void testProcessIssue() {
+    public void testProcessIssue() {
     	fail();
     }
 }

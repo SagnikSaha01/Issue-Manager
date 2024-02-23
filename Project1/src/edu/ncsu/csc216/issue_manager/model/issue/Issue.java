@@ -86,14 +86,14 @@ public class Issue {
 	 * @param state the state to be set
 	 */
 	private void setState(String state) {
-		
+		//TODO implement
 	}
 	/**
 	 * Sets the type of issue
 	 * @param issueType the type of issue to be set
 	 */
 	private void setIssueType(String issueType) {
-		
+		 //TODO implement
 	}
 	/**
 	 * Sets if the issue is confirmed
@@ -107,7 +107,7 @@ public class Issue {
 	 * @param resolution the resolution to be set
 	 */
 	private void setResolution(String resolution) {
-		
+		//TODO implement
 	}
 	/**
 	 * Returns the issue summary
@@ -201,7 +201,7 @@ public class Issue {
 	 * @param c command that helps update the issue
 	 */
 	public void update(Command c) {
-		
+		//TODO implement
 	}
 
 	/**

@@ -39,7 +39,7 @@ public class IssueList {
 	 * Helps check for any duplciate issues that are already added
 	 */
 	private void addIssue() {
-		
+		//TODO implement
 	}
 	/**
 	 * Returns all the issues in the form of a list
@@ -70,13 +70,13 @@ public class IssueList {
 	 * @param c command to be executed
 	 */
 	public void executeCommand(int index, Command c) {
-		
+		//TODO implement
 	}
 	/**
 	 * Deletes an issue from the issue list 
 	 * @param index the id of the issue that is being removed
 	 */
 	public void deleteIssueById(int index) {
-		
+		//TODO implement
 	}
 }
