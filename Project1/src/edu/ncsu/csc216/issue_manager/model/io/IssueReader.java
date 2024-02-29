@@ -15,8 +15,13 @@ public class IssueReader {
 	 * @param fileName file from which the issues will be read from
 	 * @return array list with the stored issues
 	 */
-	public static ArrayList<Issue> readIssuesFromFile(String fileName) throws FileNotFoundException{
-		Scanner fileReader = new Scanner(new FileInputStream(fileName));  
+	public static ArrayList<Issue> readIssuesFromFile(String fileName) {
+		Scanner fileReader = null;
+		try {
+			fileReader = new Scanner(new FileInputStream(fileName));
+		} catch (FileNotFoundException e) {	
+			throw new IllegalArgumentException("Unable to load file");
+		}  
  	    ArrayList<Issue> issues = new ArrayList<Issue>();
  	    String text = "";
  	    while (fileReader.hasNextLine()) { 
