@@ -28,16 +28,16 @@ public class Command {
 	 */
 	public Command(CommandValue c, String ownerId, Resolution r, String note) {
 		if(c == null) {
-			throw new IllegalArgumentException("Invalid information");
+			throw new IllegalArgumentException("Invalid information.");
 		}
 		if((c == CommandValue.ASSIGN) && (ownerId == null || ownerId.length() == 0)) {
-			throw new IllegalArgumentException("Invalid information");
+			throw new IllegalArgumentException("Invalid information.");
 		}
 		if(c == CommandValue.RESOLVE && r == null) {
-			throw new IllegalArgumentException("Invalid information");
+			throw new IllegalArgumentException("Invalid information.");
 		}
 		if(note == null || note.length() == 0) {
-			throw new IllegalArgumentException("Invalid information");
+			throw new IllegalArgumentException("Invalid information.");
 		}
 		this.c = c;
 		this.r = r;
