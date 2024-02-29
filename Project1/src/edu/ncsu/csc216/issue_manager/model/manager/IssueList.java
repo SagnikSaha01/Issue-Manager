@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
@@ -9,12 +10,14 @@ import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
  * Class responsible for managing the list of issues
  */
 public class IssueList {
+	private List<Issue> issues;
 	/** Tracks what the next IssueId should be */
 	private int counter;
 	/**
 	 * Constructor for the issue list object
 	 */
 	public IssueList() {
+		issues = new ArrayList<>();
 		counter = 0;
 	}
 	/**
@@ -25,6 +28,7 @@ public class IssueList {
 	 * @return the Id of the added issue
 	 */
 	public int addIssue(IssueType issueType, String summary, String note) {
+		issues.add(new Issue(counter,issueType,summary,note));
 		counter++;
 		return counter;
 	}
@@ -33,20 +37,22 @@ public class IssueList {
 	 * @param issues total collection of issues 
 	 */
 	public void addIssues(List<Issue> issues) {
-		addIssue();
+		for(Issue i : issues) {
+			this.issues.add(i);
+		}
 	}
 	/**
-	 * Helps check for any duplciate issues that are already added
+	 * Helps check for any duplicate issues that are already added
 	 */
 	private void addIssue() {
-		//TODO implement
+		
 	}
 	/**
 	 * Returns all the issues in the form of a list
 	 * @return a list of issues
 	 */
 	public List<Issue> getIssues(){
-		return null;
+		return issues;
 	}
 	/**
 	 * Returns the issue based on a given Id
@@ -54,6 +60,11 @@ public class IssueList {
 	 * @return the issue with the given id
 	 */
 	public Issue getIssueById(int index) {
+		for(Issue i : issues) {
+			if(i.getIssueId() == index) {
+				return i;
+			}
+		}
 		return null;
 	}
 	/**
@@ -62,7 +73,13 @@ public class IssueList {
 	 * @return list of issues that are only the given type
 	 */
 	public List<Issue> getIssuesByType(String issueType){
-		return null; 
+		List<Issue> output = new ArrayList<>();
+		for(Issue i : issues) {
+			if(i.getIssueType().equals(issueType)) {
+				output.add(i);
+			}
+		}
+		return output;
 	}
 	/**
 	 * Executes a given command
@@ -70,13 +87,21 @@ public class IssueList {
 	 * @param c command to be executed
 	 */
 	public void executeCommand(int index, Command c) {
-		//TODO implement
+		for(Issue i : issues) {
+			if(i.getIssueId() == index) {
+				i.update(c);
+			}
+		}
 	}
 	/**
 	 * Deletes an issue from the issue list 
 	 * @param index the id of the issue that is being removed
 	 */
 	public void deleteIssueById(int index) {
-		//TODO implement
+		for(Issue i : issues) {
+			if(i.getIssueId() == index) {
+				issues.remove(i);
+			}
+		}
 	}
 }

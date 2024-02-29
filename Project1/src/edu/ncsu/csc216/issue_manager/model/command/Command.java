@@ -3,6 +3,10 @@ package edu.ncsu.csc216.issue_manager.model.command;
  * Class for the command object which is responsible for transitions between states
  */
 public class Command {
+	/** State of the command value */
+	private CommandValue c;
+	/** State of the resolution */
+	private Resolution r;
 	/** Id of owner of the issue */
 	private String ownerId;
 	/** Note of the issue */
@@ -23,6 +27,20 @@ public class Command {
 	 * @param note note associated with the issue
 	 */
 	public Command(CommandValue c, String ownerId, Resolution r, String note) {
+		if(c == null) {
+			throw new IllegalArgumentException("Invalid information");
+		}
+		if((c == CommandValue.ASSIGN) && (ownerId == null || ownerId.length() == 0)) {
+			throw new IllegalArgumentException("Invalid information");
+		}
+		if(c == CommandValue.RESOLVE && r == null) {
+			throw new IllegalArgumentException("Invalid information");
+		}
+		if(note == null || note.length() == 0) {
+			throw new IllegalArgumentException("Invalid information");
+		}
+		this.c = c;
+		this.r = r;
 		this.ownerId = ownerId;
 		this.note = note;
 	}
@@ -31,7 +49,7 @@ public class Command {
 	 * @return the command value
 	 */
 	public CommandValue getCommand() {
-		return null;
+		return c;
 	}
 	/**
 	 * Returns the Id of the owner
@@ -45,7 +63,7 @@ public class Command {
 	 * @return the resolution
 	 */
 	public Resolution getResolution(){
-		return null;
+		return r;
 	}
 	/**
 	 * Returns the note associated with issue

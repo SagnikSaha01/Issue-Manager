@@ -3,10 +3,21 @@ package edu.ncsu.csc216.issue_manager.model.issue;
 import java.util.ArrayList;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
 /**
  * Class for managing and modifying Issue objects 
  */
 public class Issue {
+	private NewState newState = new NewState();
+	
+	private ConfirmedState confirmedState = new ConfirmedState();
+	
+	private ClosedState closedState = new ClosedState();
+	
+	private VerifyingState verifyingState = new VerifyingState();
+	
+	private WorkingState workingState = new WorkingState();
 	/** Constant for the closed state */
 	public static final String CLOSED_NAME = "Closed";
 	/** Constant for the verifying state */
@@ -32,6 +43,12 @@ public class Issue {
 	/** List of notes in an array list */
 	private ArrayList<String> notes;
 	
+	private IssueType issueType;
+	
+	private IssueState state;
+	
+	private Resolution resolution;
+	
 	/**
 	 * Constructor for an issue object
 	 * @param issueId the id of the issue
@@ -56,6 +73,31 @@ public class Issue {
 	 * @param notes any additional notes for the issue
 	 */
 	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
+		if(state.equals(WORKING_NAME) || state.equals(VERIFYING_NAME)) {
+			if(owner == null || owner.length() == 0) {
+				 throw new IllegalArgumentException("Issue cannot be created");
+			}
+		}
+		if(state.equals(VERIFYING_NAME) || state.equals(CLOSED_NAME)) {
+			if(resolution == null || resolution.length() == 0) {
+				 throw new IllegalArgumentException("Issue cannot be created");
+			}
+		}
+		if(issueType.equals(I_ENHANCEMENT) && state.equals(CONFIRMED_NAME)) {
+			 throw new IllegalArgumentException("Issue cannot be created");
+		}
+		if(issueType.equals(I_BUG) && state.equals(WORKING_NAME) && confirmed == false) {
+			 throw new IllegalArgumentException("Issue cannot be created");
+		}
+		if(state.equals(VERIFYING_NAME) && issueType.equals(I_BUG) && !resolution.equals(Resolution.FIXED)) {
+			 throw new IllegalArgumentException("Issue cannot be created");
+		}
+		if(state.equals(CLOSED_NAME) && (resolution == null || resolution.length() == 0)) {
+			 throw new IllegalArgumentException("Issue cannot be created");
+		}
+		if(state.equals(I_ENHANCEMENT) && confirmed) {
+			 throw new IllegalArgumentException("Issue cannot be created");
+		}
 		setIssueId(issueId);
 		setOwner(owner);
 		setIssueType(issueType);
@@ -79,6 +121,9 @@ public class Issue {
 	 * @param issueId the issueId to set
 	 */
 	private void setIssueId(int issueId) {
+		if(issueId < 1) {
+			throw new IllegalArgumentException("Issue cannot be created");
+		}
 		this.issueId = issueId;
 	}
 	/**
@@ -86,14 +131,32 @@ public class Issue {
 	 * @param state the state to be set
 	 */
 	private void setState(String state) {
-		//TODO implement
+		if(state.equals(CLOSED_NAME)) {
+			this.state = closedState;
+		}else if (state.equals(CONFIRMED_NAME)) {
+			this.state = confirmedState;
+		}else if(state.equals(NEW_NAME)) {
+			this.state = newState;
+		}else if(state.equals(VERIFYING_NAME)) {
+			this.state = verifyingState;
+		}else if(state.equals(WORKING_NAME)) {
+			this.state = workingState;
+		}else {
+			throw new IllegalArgumentException("Issue cannot be created");
+		}
 	}
 	/**
 	 * Sets the type of issue
 	 * @param issueType the type of issue to be set
 	 */
 	private void setIssueType(String issueType) {
-		 //TODO implement
+		 if(issueType.equals(IssueType.BUG.toString())) {
+			 this.issueType = IssueType.ENHANCEMENT;
+		 }else if(issueType.equals(IssueType.BUG.toString())) {
+			 this.issueType = IssueType.BUG;
+		 }else {
+			 throw new IllegalArgumentException("Issue cannot be created");
+		 }
 	}
 	/**
 	 * Sets if the issue is confirmed
@@ -107,7 +170,17 @@ public class Issue {
 	 * @param resolution the resolution to be set
 	 */
 	private void setResolution(String resolution) {
-		//TODO implement
+		if(resolution.equals(Command.R_FIXED)) {
+			this.resolution = Resolution.FIXED;
+		}else if(resolution.equals(Command.R_DUPLICATE)) {
+			this.resolution = Resolution.DUPLICATE;
+		}else if(resolution.equals(Command.R_WONTFIX)) {
+			this.resolution = Resolution.WONTFIX;
+		}else if(resolution.equals(Command.R_WORKSFORME)) {
+			this.resolution = Resolution.WORKSFORME;
+		}else {
+			throw new IllegalArgumentException("Issue cannot be created");
+		}
 	}
 	/**
 	 * Returns the issue summary
@@ -136,8 +209,12 @@ public class Issue {
 	/**
 	 * Sets the owner of the issue
 	 * @param owner the owner to set
+	 * @throws IllegalArgumentException if owner is null or empty
 	 */
 	private void setOwner(String owner) {
+		if(owner == null) {
+			throw new IllegalArgumentException("Issue cannot be created");
+		}
 		this.owner = owner;
 	}
 
@@ -154,6 +231,9 @@ public class Issue {
 	 * @param notes the notes to set
 	 */
 	private void setNotes(ArrayList<String> notes) {
+		if(notes == null || notes.size() == 0) {
+			throw new IllegalArgumentException("Issue cannot be created");
+		}
 		this.notes = notes;
 	}
 	/**
@@ -161,15 +241,25 @@ public class Issue {
 	 * @return enhancement or bug based on the type 
 	 */
 	public String getIssueType() {
-		// TODO Auto-generated method stub
-		return null;
+		if(issueType.equals(CLOSED_NAME)) {
+			return CLOSED_NAME;
+		}else if(issueType.equals(CONFIRMED_NAME)) {
+			return CONFIRMED_NAME;
+		} else if(issueType.equals(NEW_NAME)) {
+			return NEW_NAME;
+		} else if(issueType.equals(VERIFYING_NAME)) {
+			return VERIFYING_NAME;
+		} else if(issueType.equals(WORKING_NAME)) {
+			return WORKING_NAME;
+		}else {
+			return null;
+		}
 	}
 	/**
 	 * Returns if the issue is confirmed or not
 	 * @return true or false based on if the issue is confirmed or not
 	 */
 	public boolean isConfirmed() {
-		// TODO Auto-generated method stub
 		return confirmed;
 	}
 	/**
@@ -177,23 +267,30 @@ public class Issue {
 	 * @return the resolution
 	 */
 	public String getResolution() {
-		// TODO Auto-generated method stub
-		return null;
+		if(resolution.equals(Resolution.DUPLICATE)) {
+			return Command.R_DUPLICATE;
+		}else if(resolution.equals(Resolution.FIXED)) {
+			return Command.R_FIXED;
+		}else if(resolution.equals(Resolution.WONTFIX)) {
+			return Command.R_WONTFIX;
+		}else if(resolution.equals(Resolution.WORKSFORME)) {
+			return Command.R_WORKSFORME;
+		} else {
+			return null;
+		}
 	}
 	/**
 	 * Returns the name of the state
 	 * @return state name
 	 */
 	public String getStateName() {
-		// TODO Auto-generated method stub
-		return null;
+		return state.getStateName();
 	}
 	/**
 	 * Returns the note of an issue
 	 * @return the issue note
 	 */
 	public String getNotesString() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	/**
@@ -201,7 +298,21 @@ public class Issue {
 	 * @param c command that helps update the issue
 	 */
 	public void update(Command c) {
-		//TODO implement
+		state.updateState(c);
+	}
+	private void addNote(String note) {
+		if(note == null || note.length() == 0) {
+			throw new IllegalArgumentException("Issue cannot be created");
+		}
+		notes.add("[" + state.getStateName() + "] " + note);
+	}
+	public String toString() {
+		String out = "*";
+		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + issueType.toString() + "," + summary + "," + owner + "," + confirmed + "," + resolution.toString();
+		for(String note : notes) {
+			out = out + "\n-" + note;
+		}
+		return out;
 	}
 
 	/**
@@ -242,7 +353,15 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
-				// TODO Auto-generated method stub
+				if(c.getCommand().equals(CommandValue.VERIFY)) {
+					setState(CLOSED_NAME);
+					addNote(c.getNote());
+				}else if(c.getCommand().equals(CommandValue.REOPEN)) {
+					setState(WORKING_NAME);
+					addNote(c.getNote());
+				}else {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 				
 			}
 			/**
@@ -251,7 +370,7 @@ public class Issue {
 			 */
 			public String getStateName() {
 				// TODO Auto-generated method stub
-				return null;
+				return VERIFYING_NAME;
 			}
 		}
 		/**
@@ -263,8 +382,21 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
-				// TODO Auto-generated method stub
-				
+				if(c.getResolution().equals(resolution.FIXED)) {
+					setState(VERIFYING_NAME);
+					addNote(c.getNote());
+				}else {
+					setState(CLOSED_NAME);
+					if(c.getResolution().equals(Resolution.DUPLICATE) || c.getResolution().equals(Resolution.WONTFIX)) {
+						setResolution(c.getResolution().toString());
+						addNote(c.getNote());
+					}else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
+						setResolution(c.getResolution().toString());
+						addNote(c.getNote());
+					}else {
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+				}
 			}
 			/**
 			 * Returns the name of the State
@@ -272,7 +404,7 @@ public class Issue {
 			 */
 			public String getStateName() {
 				// TODO Auto-generated method stub
-				return null;
+				return WORKING_NAME;
 			}
 
 		}
@@ -285,16 +417,37 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
-				// TODO Auto-generated method stub
-				
+				if(c.getCommand().equals(CommandValue.ASSIGN) && issueType.equals(IssueType.ENHANCEMENT)) {
+					try {
+						setOwner(c.getOwnerId());
+						setState(NEW_NAME);
+						addNote(c.getNote());
+					} catch (Exception e){
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+				}else if(c.getCommand().equals(CommandValue.CONFIRM) && issueType == IssueType.BUG) {
+					try {
+						setState(CONFIRMED_NAME);
+						addNote(c.getNote());
+					} catch (Exception e) {
+						throw new UnsupportedOperationException("Invalid information."); 
+					}
+				}else if(c.getCommand().equals(CommandValue.RESOLVE)) {
+					try {
+						setState(CLOSED_NAME);
+						addNote(c.getNote());
+						resolution = c.getResolution();
+					} catch (Exception e) {
+						throw new UnsupportedOperationException("Invalid information."); 
+					}
+				}
 			}
 			/**
 			 * Returns the name of the State
 			 * @return state name
 			 */
 			public String getStateName() {
-				// TODO Auto-generated method stub
-				return null;
+				return NEW_NAME;
 			}
 
 		}
@@ -309,8 +462,17 @@ public class Issue {
 			 */
 
 			public void updateState(Command c) {
-				// TODO Auto-generated method stub
-				
+				if(c.getCommand().equals(CommandValue.ASSIGN)) {
+					setOwner(c.getOwnerId());
+					setState(WORKING_NAME);
+					addNote(c.getNote());
+				} else if(c.getResolution().equals(Resolution.WONTFIX)) {
+					setState(CLOSED_NAME);
+					setResolution(Resolution.WONTFIX.toString());
+					addNote(c.getNote());
+				} else {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 			}
 			/**
 			 * Returns the name of the State
@@ -318,7 +480,7 @@ public class Issue {
 			 */
 			public String getStateName() {
 				// TODO Auto-generated method stub
-				return null;
+				return CONFIRMED_NAME;
 			}
 		}
 		/**
@@ -330,7 +492,27 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
-				// TODO Auto-generated method stub
+				if(c.getCommand().equals(CommandValue.REOPEN)) {
+					resolution = null;
+					if(issueType.equals(IssueType.ENHANCEMENT) && getOwner().length() != 0) {
+						setState(WORKING_NAME);
+						addNote(c.getNote());
+					}else if(issueType.equals(IssueType.BUG)) {
+						if(state.getStateName().equals(CONFIRMED_NAME) && getOwner().length() != 0) {
+							setState(WORKING_NAME);
+							addNote(c.getNote());
+						}else if(state.getStateName().equals(CONFIRMED_NAME) && getOwner().length() == 0) {
+							setState(CONFIRMED_NAME);
+							addNote(c.getNote());
+						}else if(getOwner().length() == 0) {
+							setState(NEW_NAME);
+							addNote(c.getNote());
+						}
+						
+					}
+					
+				}
+				throw new UnsupportedOperationException("Invalid information.");
 				
 			}
 			/**
@@ -339,7 +521,7 @@ public class Issue {
 			 */
 			public String getStateName() {
 				// TODO Auto-generated method stub
-				return null;
+				return CLOSED_NAME;
 			}
 		}
 		/**

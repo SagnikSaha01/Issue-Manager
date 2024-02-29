@@ -1,33 +1,47 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
+import edu.ncsu.csc216.issue_manager.model.io.IssueWriter;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 /**
  * Class responsible for managing issues
  */
 public class IssueManager {
+	
+	private IssueList issueList;
+	
+	public IssueManager() {
+		createNewIssueList();
+	}
 	/**
 	 * Loads the issues from a file
-	 * @param fileName name of the file to read data
+	 * @param fileName name of the file to read data 
 	 */
 	public void loadIssuesFromFile(String fileName) {
-		// TODO Auto-generated method stub
+		try {
+			issueList.addIssues(IssueReader.readIssuesFromFile(fileName));
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Invalid input.");
+		}
 		
 	}
 	/**
 	 * Creates a new issue list
 	 */
 	public void createNewIssueList() {
-		// TODO Auto-generated method stub
-		
+		issueList = new IssueList();
 	}
 	/**
 	 * Saves the current issues to a file
 	 * @param fileName file name where the issues will be saved 
 	 */
 	public void saveIssuesToFile(String fileName) {
-		// TODO Auto-generated method stub
+		IssueWriter.writeIssuesToFile(fileName, issueList.getIssues());
 		
 	}
 	/**
@@ -43,8 +57,15 @@ public class IssueManager {
 	 * @return a 2d array with the issues
 	 */
 	public Object[][] getIssueListAsArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[][] output = new Object[issueList.getIssues().size()][4];
+		for(int i = 0; i < issueList.getIssues().size(); i++) {
+			Issue current = issueList.getIssues().get(i);
+			output[i][0] = current.getIssueId();
+			output[i][1] = current.getStateName();
+			output[i][2] = current.getIssueType();
+			output[i][3] = current.getSummary();
+		}
+		return output;
 	}
 	/**
 	 * Gets the issue with a specific id
@@ -52,17 +73,25 @@ public class IssueManager {
 	 * @return issue with the given id
 	 */
 	public Issue getIssueById(int issueId) {
-		// TODO Auto-generated method stub
-		return null;
+		return issueList.getIssueById(issueId);
 	}
 	/**
 	 * Gets the list of issues of a specific type 
 	 * @param string the type of issues to retrieve
 	 * @return an array with the specified issue type
 	 */
-	public Object[][] getIssueListAsArrayByIssueType(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object[][] getIssueListAsArrayByIssueType(String type) {
+		Object[][] output = new Object[issueList.getIssues().size()][4];
+		for(int i = 0; i < issueList.getIssues().size(); i++) {
+			Issue current = issueList.getIssues().get(i);
+			if(current.getIssueType().equals(type)) {
+				output[i][0] = current.getIssueId();
+				output[i][1] = current.getStateName();
+				output[i][2] = current.getIssueType();
+				output[i][3] = current.getSummary();
+			}
+		}
+		return output;
 	}
 	/**
 	 * Executes the given command
@@ -70,16 +99,14 @@ public class IssueManager {
 	 * @param c the command that is being executed
 	 */
 	public void executeCommand(int issueId, Command c) {
-		// TODO Auto-generated method stub
-		
+		issueList.executeCommand(issueId, c);
 	}
 	/**
 	 * Deletes an issue with a specified id
 	 * @param issueId the issue to be deleted
 	 */
 	public void deleteIssueById(int issueId) {
-		// TODO Auto-generated method stub
-		
+		issueList.deleteIssueById(issueId);
 	}
 	/**
 	 * Adds a new issue to the list
@@ -88,7 +115,6 @@ public class IssueManager {
 	 * @param note any additional notes of the issue
 	 */
 	public void addIssueToList(IssueType type, String summary, String note) {
-		// TODO Auto-generated method stub
-		
+		issueList.addIssue(type,summary,note);
 	}
 }
