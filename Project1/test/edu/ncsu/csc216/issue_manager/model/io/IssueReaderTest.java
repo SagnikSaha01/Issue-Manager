@@ -2,7 +2,12 @@ package edu.ncsu.csc216.issue_manager.model.io;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
+import edu.ncsu.csc216.issue_manager.model.issue.Issue;
+import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 
 /**
  * Tests for the IssueReader class
@@ -13,14 +18,21 @@ public class IssueReaderTest {
 	 */
 	@Test
 	public void testReadIssuesFromFile(){
-		fail();
+		ArrayList<Issue> allIssues = new ArrayList<Issue>();
+		
+		allIssues = IssueReader.readIssuesFromFile("test-files/issue1.txt");
+		
+		assertEquals(5,allIssues.size());
+		Issue firstIssue = allIssues.get(0);
+		assertAll("Issue", 
+				() -> assertEquals(1, firstIssue.getIssueId()), 
+				() -> assertEquals(Issue.NEW_NAME, firstIssue.getStateName()),
+				() -> assertEquals(Issue.I_ENHANCEMENT, firstIssue.getIssueType()), 
+				() -> assertEquals("Issue Description", firstIssue.getSummary()),
+				() -> assertEquals("", firstIssue.getOwner()),
+				() -> assertFalse(firstIssue.isConfirmed()), 
+				() -> assertNull(firstIssue.getResolution()));
 	}
-	/**
-	 * Testing the processIssue method
-	 */
-	@Test
-    public void testProcessIssue() {
-    	fail();
-    }
+	
 }
 

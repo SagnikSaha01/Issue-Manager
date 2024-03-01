@@ -169,7 +169,9 @@ public class Issue {
 	 * @param resolution the resolution to be set
 	 */
 	private void setResolution(String resolution) {
-		if(resolution.equals(Command.R_FIXED)) {
+		if(resolution.length() == 0) {
+			this.resolution = null;
+		}else if(resolution.equals(Command.R_FIXED)) {
 			this.resolution = Resolution.FIXED;
 		}else if(resolution.equals(Command.R_DUPLICATE)) {
 			this.resolution = Resolution.DUPLICATE;

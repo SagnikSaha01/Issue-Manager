@@ -20,6 +20,9 @@ public class IssueWriterTest {
 	@Test
 	public void testwriteIssuesToFile() {
 		
+		
+		
+		/*
 			ArrayList<Activity> activities = new ArrayList<Activity>();
 			activities.add(new Course("CSC 116", "Intro to Programming - Java", "003", 3, "spbalik", "MW", 1250, 1440));
 			activities.add(new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 1330, 1445));
@@ -32,6 +35,7 @@ public class IssueWriterTest {
 			}
 			
 			checkFiles("test-files/expected_course_records.txt", "test-files/actual_course_records.txt");
+			*/
 	}
 		/**
 		 * Helper method to compare two files for the same contents
