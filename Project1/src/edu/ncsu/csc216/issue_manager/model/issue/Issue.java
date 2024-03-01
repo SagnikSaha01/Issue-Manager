@@ -384,10 +384,11 @@ public class Issue {
 				}else {
 					setState(CLOSED_NAME);
 					if(c.getResolution().equals(Resolution.DUPLICATE) || c.getResolution().equals(Resolution.WONTFIX)) {
-						setResolution(c.getResolution().toString());
+						if(c.getResolution().equals(Resolution.DUPLICATE)) { setResolution(Command.R_DUPLICATE); }
+						if(c.getResolution().equals(Resolution.WONTFIX)) { setResolution(Command.R_WONTFIX); }
 						addNote(c.getNote());
 					}else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
-						setResolution(c.getResolution().toString());
+						setResolution(Command.R_WORKSFORME);
 						addNote(c.getNote());
 					}else {
 						throw new UnsupportedOperationException("Invalid information.");
@@ -464,7 +465,7 @@ public class Issue {
 					addNote(c.getNote());
 				} else if(c.getResolution().equals(Resolution.WONTFIX)) {
 					setState(CLOSED_NAME);
-					setResolution(Resolution.WONTFIX.toString());
+					setResolution(Command.R_WONTFIX);
 					addNote(c.getNote());
 				} else {
 					throw new UnsupportedOperationException("Invalid information.");
@@ -490,25 +491,28 @@ public class Issue {
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.REOPEN)) {
 					resolution = null;
-					if(issueType.equals(IssueType.ENHANCEMENT) && getOwner().length() != 0) {
+					if(issueType.equals(IssueType.ENHANCEMENT) && c.getOwnerId().length() != 0) {
 						setState(WORKING_NAME);
 						addNote(c.getNote());
-					}else if(issueType.equals(IssueType.BUG)) {
-						if(state.getStateName().equals(CONFIRMED_NAME) && getOwner().length() != 0) {
+					} else if(issueType.equals(IssueType.BUG)) {
+						
+						if(isConfirmed() && c.getOwnerId().length() != 0) {
 							setState(WORKING_NAME);
 							addNote(c.getNote());
-						}else if(state.getStateName().equals(CONFIRMED_NAME) && getOwner().length() == 0) {
+						}else if(isConfirmed() && c.getOwnerId().length() == 0) {
 							setState(CONFIRMED_NAME);
 							addNote(c.getNote());
-						}else if(getOwner().length() == 0) {
+						}else if(c.getOwnerId().length() == 0) {
 							setState(NEW_NAME);
 							addNote(c.getNote());
 						}
 						
 					}
 					
+				} else {
+					throw new UnsupportedOperationException("Invalid information.");
 				}
-				throw new UnsupportedOperationException("Invalid information.");
+				
 				
 			}
 			/**

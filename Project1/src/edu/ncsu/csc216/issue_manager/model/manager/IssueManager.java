@@ -117,4 +117,5 @@ public class IssueManager {
 	public void addIssueToList(IssueType type, String summary, String note) {
 		issueList.addIssue(type,summary,note);
 	}
+	
 }

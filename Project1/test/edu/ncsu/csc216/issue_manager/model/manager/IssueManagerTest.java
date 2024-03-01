@@ -21,6 +21,9 @@ public class IssueManagerTest {
 		
 		assertEquals(1,manager.getIssueById(1).getIssueId());
 		
+		manager.addIssueToList(IssueType.BUG, "summary", "note");
+		assertEquals("Issue description", manager.getIssueById(3).getSummary());
+		
 		Object[][] testArray = manager.getIssueListAsArray();
 		assertEquals(1,testArray[0][0]);
 		assertEquals(Issue.NEW_NAME,testArray[0][1]);
