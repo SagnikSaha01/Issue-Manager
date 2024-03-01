@@ -30,6 +30,7 @@ public class IssueWriterTest {
 		Exception e = assertThrows(IllegalArgumentException.class,
 				() -> IssueWriter.writeIssuesToFile("test-files/issue7.txt", issues));
 				assertEquals(e.getMessage(),"Unable to save to file.");	
+		checkFiles("test-files/issue_list.txt","test-files/issue1.txt");
 		IssueWriter.writeIssuesToFile("test-files/issue_list.txt", issues);
 		
 	}
