@@ -6,53 +6,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ncsu.csc216.issue_manager.model.issue.Issue;
+import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
+
 
 /**
  * Tests the IssueList Class
  */
 public class IssueListTest {
 	/**
-	 * Tests the add issue method
+	 * Tests the IssueList method
 	 */
 	@Test
-	public void addIssue() {
-		fail();
+	public void testIssueList() {
+		IssueList list = new IssueList();
+		
+		list.addIssue(IssueType.BUG, "summary", "note");
+		assertEquals(1,list.getIssues().size());
+		assertEquals(1,list.getIssueById(1).getIssueId());
+		assertEquals("summary",list.getIssueById(1).getSummary());
+		
+		assertEquals(1,list.getIssuesByType(Issue.I_BUG).size());
+		assertEquals(0,list.getIssuesByType(Issue.I_ENHANCEMENT).size());
 	}
 	
-	/**
-	 * Tests the get issue method
-	 */
-	@Test
-	public void testGetIssues(){
-		fail();
-	}
-	/**
-	 * Tests the get issue by id method
-	 */
-	@Test
-	public void testGetIssueById() {
-		fail();
-	}
-	/**
-	 * Tests the getIssueByType method
-	 */
-	@Test
-	public void testGetIssuesByType(){
-		fail(); 
-	}
-	/**
-	 * Tests the execute command method
-	 */
-	@Test
-	public void testExecuteCommand() {
-		fail();
-	}
-	/**
-	 * Tests the deleteIssueById method
-	 */
-	@Test
-	public void testDeleteIssueById() {
-		fail();
-	}
 	
 }

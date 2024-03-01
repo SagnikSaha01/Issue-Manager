@@ -58,12 +58,15 @@ public class Issue {
 	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
 		setIssueId(issueId);
-		setIssueType(issueType.toString());
+		this.issueType = issueType;
 		setSummary(summary);
+		this.state = newState;
+		this.notes = new ArrayList<String>();
 		addNote(note);
+		
 	}
 	/**
-	 * Alternative constructor for an issue obejct
+	 * Alternative constructor for an issue object
 	 * @param issueId Id of the issue
 	 * @param state current state of the issue
 	 * @param issueType whether it is a bug or enhancement
@@ -297,7 +300,7 @@ public class Issue {
 		if(note == null || note.length() == 0) {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		notes.add("[" + state.getStateName() + "] " + note);
+		notes.add("[" + this.state.getStateName() + "] " + note);
 	}
 	public String toString() {
 		String out = "*";

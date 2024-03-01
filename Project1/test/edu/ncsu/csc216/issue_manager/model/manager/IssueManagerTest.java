@@ -3,6 +3,9 @@ package edu.ncsu.csc216.issue_manager.model.manager;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import edu.ncsu.csc216.issue_manager.model.issue.Issue;
+import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 /**
  * Testing the IssueManager class
  */
@@ -11,72 +14,24 @@ public class IssueManagerTest {
 	 * Tests the loadIssuesFromFile method
 	 */
 	@Test
-	public void testLoadIssuesFromFile() {
-		fail();	
-	}
-	/**
-	 * Tests the createNewIssueList method
-	 */
-	@Test
-	public void testCreateNewIssueList() {
-		fail();
+	public void testIssueManager() {
+		IssueManager manager = new IssueManager();
+		
+		manager.loadIssuesFromFile("test-files/issue1.txt");
+		
+		assertEquals(1,manager.getIssueById(1).getIssueId());
+		
+		Object[][] testArray = manager.getIssueListAsArray();
+		assertEquals(1,testArray[0][0]);
+		assertEquals(Issue.NEW_NAME,testArray[0][1]);
+		assertEquals(Issue.I_ENHANCEMENT,testArray[0][2]);
+		assertEquals("Issue description",testArray[0][3]);
+		testArray = manager.getIssueListAsArrayByIssueType(Issue.I_BUG);
+		assertEquals(3,testArray[0][0]);
+		assertEquals(Issue.CONFIRMED_NAME,testArray[0][1]);
+		assertEquals(Issue.I_BUG,testArray[0][2]);
+		assertEquals("Issue description",testArray[0][3]);
 		
 	}
-	/**
-	 * Tests the saveIssuesToFile method
-	 */
-	@Test
-	public void saveIssuesToFile() {
-		fail();
-		
-	}
-	/**
-	 * Tests the issueManager method
-	 */
-	@Test
-	public void testGetInstance() {
-		fail();
-	}
-	/**
-	 * Tests the getIssueListAsArray method
-	 */
-	@Test
-	public void testGetIssueListAsArray() {
-		fail();
-	}
-	/**
-	 * Gets the issue with a specific id
-	 */
-	@Test
-	public void testGetIssueById() {
-		fail();
-	}
-	/**
-	 * Tests the IssueListAsArrayByIssueType method
-	 */
-	@Test
-	public void testGetIssueListAsArrayByIssueType() {
-		fail();
-	}
-	/**
-	 * Tests executeCommand method
-	 */
-	@Test
-	public void testExecuteCommand() {
-		fail();
-	}
-	/**
-	 * Tests deleteIssueById method
-	 */
-	@Test
-	public void testDeleteIssueById() {
-		fail();
-	}
-	/**
-	 * Tests addIssueToList method
-	 */
-	@Test
-	public void testAddIssueToList() {
-		fail();
-	}
+	
 }

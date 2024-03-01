@@ -18,7 +18,7 @@ public class IssueList {
 	 */
 	public IssueList() {
 		issues = new ArrayList<>();
-		counter = 0;
+		counter = 1;
 	}
 	/**
 	 * Adds an issue to the IssueList
