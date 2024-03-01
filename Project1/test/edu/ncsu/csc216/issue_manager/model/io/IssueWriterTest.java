@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.issue.Issue;
+
 
 /**
  * Tests the Issue Writer class
@@ -22,20 +25,13 @@ public class IssueWriterTest {
 		
 		
 		
-		/*
-			ArrayList<Activity> activities = new ArrayList<Activity>();
-			activities.add(new Course("CSC 116", "Intro to Programming - Java", "003", 3, "spbalik", "MW", 1250, 1440));
-			activities.add(new Course("CSC 216", "Software Development Fundamentals", "001", 3, "sesmith5", "MW", 1330, 1445));
-			activities.add(new Course("CSC 216", "Software Development Fundamentals", "601", 3, "jctetter", "A"));
-			
-			try {
-				ActivityRecordIO.writeActivityRecords("test-files/actual_course_records.txt", activities);
-			} catch (IOException e) {
-				fail("Cannot write to course records file");
-			}
-			
-			checkFiles("test-files/expected_course_records.txt", "test-files/actual_course_records.txt");
-			*/
+		ArrayList<Issue> issues = IssueReader.readIssuesFromFile("test-files/issue1.txt");
+		
+		Exception e = assertThrows(IllegalArgumentException.class,
+				() -> IssueWriter.writeIssuesToFile("test-files/issue7.txt", issues));
+				assertEquals(e.getMessage(),"Unable to save to file.");	
+		IssueWriter.writeIssuesToFile("test-files/issue_list.txt", issues);
+		
 	}
 		/**
 		 * Helper method to compare two files for the same contents
@@ -56,5 +52,5 @@ public class IssueWriterTest {
 				fail("Error reading files.");
 			}
 		}
-	}
+	
 }
