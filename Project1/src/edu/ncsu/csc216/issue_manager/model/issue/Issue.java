@@ -58,8 +58,9 @@ public class Issue {
 	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
 		setIssueId(issueId);
-		
-		
+		setIssueType(issueType.toString());
+		setSummary(summary);
+		addNote(note);
 	}
 	/**
 	 * Alternative constructor for an issue obejct
@@ -75,28 +76,26 @@ public class Issue {
 	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
 		if(state.equals(WORKING_NAME) || state.equals(VERIFYING_NAME)) {
 			if(owner == null || owner.length() == 0) {
-				 throw new IllegalArgumentException("Issue cannot be created");
+				 throw new IllegalArgumentException("Issue cannot be created.");
 			}
 		}
-		if(state.equals(VERIFYING_NAME) || state.equals(CLOSED_NAME)) {
-			if(resolution == null || resolution.length() == 0) {
-				 throw new IllegalArgumentException("Issue cannot be created");
-			}
+		if(state.equals(VERIFYING_NAME) && (resolution == null || resolution.length() == 0) ) {
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(issueType.equals(I_ENHANCEMENT) && state.equals(CONFIRMED_NAME)) {
-			 throw new IllegalArgumentException("Issue cannot be created");
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(issueType.equals(I_BUG) && state.equals(WORKING_NAME) && confirmed == false) {
-			 throw new IllegalArgumentException("Issue cannot be created");
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(state.equals(VERIFYING_NAME) && issueType.equals(I_BUG) && !resolution.equals(Resolution.FIXED)) {
-			 throw new IllegalArgumentException("Issue cannot be created");
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(state.equals(CLOSED_NAME) && (resolution == null || resolution.length() == 0)) {
-			 throw new IllegalArgumentException("Issue cannot be created");
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(state.equals(I_ENHANCEMENT) && confirmed) {
-			 throw new IllegalArgumentException("Issue cannot be created");
+		if(issueType.equals(I_ENHANCEMENT) && confirmed) {
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		setIssueId(issueId);
 		setOwner(owner);
@@ -150,9 +149,9 @@ public class Issue {
 	 * @param issueType the type of issue to be set
 	 */
 	private void setIssueType(String issueType) {
-		 if(issueType.equals(IssueType.BUG.toString())) {
+		 if(issueType.equals(I_ENHANCEMENT)) {
 			 this.issueType = IssueType.ENHANCEMENT;
-		 }else if(issueType.equals(IssueType.BUG.toString())) {
+		 }else if(issueType.equals(I_BUG)) {
 			 this.issueType = IssueType.BUG;
 		 }else {
 			 throw new IllegalArgumentException("Issue cannot be created");
@@ -241,18 +240,10 @@ public class Issue {
 	 * @return enhancement or bug based on the type 
 	 */
 	public String getIssueType() {
-		if(issueType.equals(CLOSED_NAME)) {
-			return CLOSED_NAME;
-		}else if(issueType.equals(CONFIRMED_NAME)) {
-			return CONFIRMED_NAME;
-		} else if(issueType.equals(NEW_NAME)) {
-			return NEW_NAME;
-		} else if(issueType.equals(VERIFYING_NAME)) {
-			return VERIFYING_NAME;
-		} else if(issueType.equals(WORKING_NAME)) {
-			return WORKING_NAME;
+		if(issueType.equals(issueType.BUG)) {
+			return I_BUG;
 		}else {
-			return null;
+			return I_ENHANCEMENT;
 		}
 	}
 	/**
@@ -302,7 +293,7 @@ public class Issue {
 	}
 	private void addNote(String note) {
 		if(note == null || note.length() == 0) {
-			throw new IllegalArgumentException("Issue cannot be created");
+			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		notes.add("[" + state.getStateName() + "] " + note);
 	}
@@ -420,7 +411,7 @@ public class Issue {
 				if(c.getCommand().equals(CommandValue.ASSIGN) && issueType.equals(IssueType.ENHANCEMENT)) {
 					try {
 						setOwner(c.getOwnerId());
-						setState(NEW_NAME);
+						setState(WORKING_NAME);
 						addNote(c.getNote());
 					} catch (Exception e){
 						throw new UnsupportedOperationException("Invalid information.");
