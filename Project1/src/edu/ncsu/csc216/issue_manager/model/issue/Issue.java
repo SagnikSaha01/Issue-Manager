@@ -266,7 +266,9 @@ public class Issue {
 	 * @return the resolution
 	 */
 	public String getResolution() {
-		if(resolution.equals(Resolution.DUPLICATE)) {
+		if(resolution == null) {
+			return "";
+		}else if(resolution.equals(Resolution.DUPLICATE)) {
 			return Command.R_DUPLICATE;
 		}else if(resolution.equals(Resolution.FIXED)) {
 			return Command.R_FIXED;
@@ -275,7 +277,7 @@ public class Issue {
 		}else if(resolution.equals(Resolution.WORKSFORME)) {
 			return Command.R_WORKSFORME;
 		} else {
-			return "";
+			return null;
 		}
 	}
 	/**
