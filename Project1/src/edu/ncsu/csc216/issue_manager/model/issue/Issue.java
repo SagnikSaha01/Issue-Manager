@@ -272,7 +272,7 @@ public class Issue {
 		}else if(resolution.equals(Resolution.WORKSFORME)) {
 			return Command.R_WORKSFORME;
 		} else {
-			return null;
+			return "";
 		}
 	}
 	/**
@@ -304,7 +304,12 @@ public class Issue {
 	}
 	public String toString() {
 		String out = "*";
-		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + issueType.toString() + "," + summary + "," + owner + "," + confirmed + "," + resolution.toString();
+		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + issueType.toString() + "," + summary + "," + owner + "," + confirmed + ",";
+		if(resolution == null) {
+			out = out + "";
+		} else {
+			out = out + resolution.toString();
+		}
 		for(String note : notes) {
 			out = out + "\n-" + note;
 		}
