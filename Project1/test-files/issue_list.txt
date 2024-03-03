@@ -1,6 +1,6 @@
-*1,New,ENHANCEMENT,Issue description,,false,
+*1,New,ENHANCEMENT,Issue description,null,false,
 -[New] Note 1
-*3,Confirmed,BUG,Issue description,,true,
+*3,Confirmed,BUG,Issue description,null,true,
 -[New] Note 1
 -[Confirmed] Note 2
 that goes on a new line

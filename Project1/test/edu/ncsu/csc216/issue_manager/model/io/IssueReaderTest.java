@@ -28,7 +28,7 @@ public class IssueReaderTest {
 				() -> assertEquals(Issue.NEW_NAME, firstIssue.getStateName()),
 				() -> assertEquals(Issue.I_ENHANCEMENT, firstIssue.getIssueType()), 
 				() -> assertEquals("Issue description", firstIssue.getSummary()),
-				() -> assertEquals("", firstIssue.getOwner()),
+				() -> assertNull(firstIssue.getOwner()),
 				() -> assertFalse(firstIssue.isConfirmed()));
 	}
 	

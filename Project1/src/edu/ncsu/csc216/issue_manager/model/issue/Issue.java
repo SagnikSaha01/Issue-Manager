@@ -218,8 +218,11 @@ public class Issue {
 	private void setOwner(String owner) {
 		if(owner == null) {
 			throw new IllegalArgumentException("Issue cannot be created");
-		}
+		} else if (owner.length() == 0) {
+			this.owner = null;
+		} else {
 		this.owner = owner;
+		}
 	}
 
 	/**
