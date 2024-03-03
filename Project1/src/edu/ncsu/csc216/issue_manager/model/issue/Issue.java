@@ -58,9 +58,13 @@ public class Issue {
 	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
 		setIssueId(issueId);
-		setIssueType(issueType.toString());
+		if(issueType == IssueType.BUG || issueType == IssueType.ENHANCEMENT) {
+			this.issueType = issueType;
+		} else { 
+			throw new IllegalArgumentException("Issue cannot be created.");
+		}
 		setSummary(summary);
-		setState(state.toString());
+		setState("New");
 		this.notes = new ArrayList<String>();
 		addNote(note);
 		
