@@ -58,9 +58,9 @@ public class Issue {
 	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
 		setIssueId(issueId);
-		this.issueType = issueType;
+		setIssueType(issueType.toString());
 		setSummary(summary);
-		this.state = newState;
+		setState(state.toString());
 		this.notes = new ArrayList<String>();
 		addNote(note);
 		
@@ -91,7 +91,7 @@ public class Issue {
 		if(issueType.equals(I_BUG) && state.equals(WORKING_NAME) && confirmed == false) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(state.equals(VERIFYING_NAME) && issueType.equals(I_BUG) && !resolution.equals(Resolution.FIXED)) {
+		if(state.equals(VERIFYING_NAME) && issueType.equals(I_BUG) && !resolution.equals(Command.R_FIXED)) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(state.equals(CLOSED_NAME) && (resolution == null || resolution.length() == 0)) {
@@ -144,7 +144,7 @@ public class Issue {
 		}else if(state.equals(WORKING_NAME)) {
 			this.state = workingState;
 		}else {
-			throw new IllegalArgumentException("Issue cannot be created");
+			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 	}
 	/**
@@ -157,7 +157,7 @@ public class Issue {
 		 }else if(issueType.equals(I_BUG)) {
 			 this.issueType = IssueType.BUG;
 		 }else {
-			 throw new IllegalArgumentException("Issue cannot be created");
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		 }
 	}
 	/**
@@ -183,7 +183,7 @@ public class Issue {
 		}else if(resolution.equals(Command.R_WORKSFORME)) {
 			this.resolution = Resolution.WORKSFORME;
 		}else {
-			throw new IllegalArgumentException("Issue cannot be created");
+			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 	}
 	/**
@@ -199,6 +199,9 @@ public class Issue {
 	 * @param summary the summary to set
 	 */
 	private void setSummary(String summary) {
+		if(summary == null || summary.length() == 0) {
+			throw new IllegalArgumentException("Issue cannot be created."); 
+		}
 		this.summary = summary;
 	}
 
@@ -267,7 +270,7 @@ public class Issue {
 	 */
 	public String getResolution() {
 		if(resolution == null) {
-			return "";
+			return null;
 		}else if(resolution.equals(Resolution.DUPLICATE)) {
 			return Command.R_DUPLICATE;
 		}else if(resolution.equals(Resolution.FIXED)) {
@@ -292,7 +295,11 @@ public class Issue {
 	 * @return the issue note
 	 */
 	public String getNotesString() {
-		return null;
+		String out = "";
+		for(String s : notes) {
+			out = "-" + s + "\n";
+		}
+		return out;
 	}
 	/**
 	 * Updates an issue
