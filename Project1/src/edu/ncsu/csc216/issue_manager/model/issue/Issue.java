@@ -446,6 +446,7 @@ public class Issue {
 				}else if(c.getCommand().equals(CommandValue.CONFIRM) && issueType == IssueType.BUG) {
 					try {
 						setState(CONFIRMED_NAME);
+						setConfirmed(true);
 						addNote(c.getNote());
 					} catch (Exception e) {
 						throw new UnsupportedOperationException("Invalid information."); 
