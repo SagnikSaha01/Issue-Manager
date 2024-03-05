@@ -479,9 +479,7 @@ public class Issue {
 			 */
 
 			public void updateState(Command c) {
-				if(c.getResolution() == null) {
-					throw new UnsupportedOperationException("Invalid information.");
-				}
+			
 				if(c.getCommand().equals(CommandValue.ASSIGN)) {
 					setOwner(c.getOwnerId());
 					setState(WORKING_NAME);
