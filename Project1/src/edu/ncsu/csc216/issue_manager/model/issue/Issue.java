@@ -401,12 +401,10 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
-				if(c.getCommand().equals(CommandValue.RESOLVE)) {
-					if(c.getResolution().equals(resolution.FIXED)) {
-						setState(VERIFYING_NAME);
-						setResolution(Command.R_FIXED);
-						addNote(c.getNote());
-					}
+				if(c.getCommand().equals(CommandValue.RESOLVE) && c.getResolution().equals(resolution.FIXED)) {
+					setState(VERIFYING_NAME);
+					setResolution(Command.R_FIXED);
+					addNote(c.getNote());
 				} else {
 					if(c.getResolution().equals(Resolution.DUPLICATE) || c.getResolution().equals(Resolution.WONTFIX)) {
 						if(c.getResolution().equals(Resolution.DUPLICATE)) { setResolution(Command.R_DUPLICATE); }
