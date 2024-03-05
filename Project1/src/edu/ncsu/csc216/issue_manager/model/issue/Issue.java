@@ -510,7 +510,7 @@ public class Issue {
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.REOPEN)) {
 					resolution = null;
-					if(issueType.equals(IssueType.ENHANCEMENT) && c.getOwnerId().length() != 0) {
+					if(issueType.equals(IssueType.ENHANCEMENT) && c.getOwnerId() == null) {
 						setState(WORKING_NAME);
 						addNote(c.getNote());
 						
