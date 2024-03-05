@@ -371,11 +371,13 @@ public class Issue {
 			 */
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.VERIFY)) {
+					addNote(c.getNote());
 					setState(CLOSED_NAME);
-					addNote(c.getNote());
+					
 				}else if(c.getCommand().equals(CommandValue.REOPEN)) {
-					setState(WORKING_NAME);
 					addNote(c.getNote());
+					setState(WORKING_NAME);
+					
 				}else {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
@@ -400,17 +402,19 @@ public class Issue {
 			 */
 			public void updateState(Command c) {
 				if(c.getResolution().equals(resolution.FIXED)) {
-					setState(VERIFYING_NAME);
 					addNote(c.getNote());
+					setState(VERIFYING_NAME);
+					
 				}else {
 					setState(CLOSED_NAME);
 					if(c.getResolution().equals(Resolution.DUPLICATE) || c.getResolution().equals(Resolution.WONTFIX)) {
-						if(c.getResolution().equals(Resolution.DUPLICATE)) { setResolution(Command.R_DUPLICATE); }
-						if(c.getResolution().equals(Resolution.WONTFIX)) { setResolution(Command.R_WONTFIX); }
-						addNote(c.getNote());
+						if(c.getResolution().equals(Resolution.DUPLICATE)) { addNote(c.getNote()); setResolution(Command.R_DUPLICATE); }
+						if(c.getResolution().equals(Resolution.WONTFIX)) { addNote(c.getNote()); setResolution(Command.R_WONTFIX); }
+						
 					}else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
-						setResolution(Command.R_WORKSFORME);
 						addNote(c.getNote());
+						setResolution(Command.R_WORKSFORME);
+						
 					}else {
 						throw new UnsupportedOperationException("Invalid information.");
 					}
@@ -438,23 +442,26 @@ public class Issue {
 				if(c.getCommand().equals(CommandValue.ASSIGN) && issueType.equals(IssueType.ENHANCEMENT)) {
 					try {
 						setOwner(c.getOwnerId());
-						setState(WORKING_NAME);
 						addNote(c.getNote());
+						setState(WORKING_NAME);
+						
 					} catch (Exception e){
 						throw new UnsupportedOperationException("Invalid information.");
 					}
 				}else if(c.getCommand().equals(CommandValue.CONFIRM) && issueType == IssueType.BUG) {
 					try {
+						addNote(c.getNote());
 						setState(CONFIRMED_NAME);
 						setConfirmed(true);
-						addNote(c.getNote());
+						
 					} catch (Exception e) {
 						throw new UnsupportedOperationException("Invalid information."); 
 					}
 				}else if(c.getCommand().equals(CommandValue.RESOLVE)) {
 					try {
-						setState(CLOSED_NAME);
 						addNote(c.getNote());
+						setState(CLOSED_NAME);
+						
 						resolution = c.getResolution();
 					} catch (Exception e) {
 						throw new UnsupportedOperationException("Invalid information."); 
@@ -482,13 +489,15 @@ public class Issue {
 
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.ASSIGN)) {
+					addNote(c.getNote());
 					setOwner(c.getOwnerId());
 					setState(WORKING_NAME);
-					addNote(c.getNote());
+					
 				} else if(c.getResolution().equals(Resolution.WONTFIX)) {
+					addNote(c.getNote());
 					setState(CLOSED_NAME);
 					setResolution(Command.R_WONTFIX);
-					addNote(c.getNote());
+					
 				} else {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
@@ -514,19 +523,23 @@ public class Issue {
 				if(c.getCommand().equals(CommandValue.REOPEN)) {
 					resolution = null;
 					if(issueType.equals(IssueType.ENHANCEMENT) && c.getOwnerId().length() != 0) {
-						setState(WORKING_NAME);
 						addNote(c.getNote());
+						setState(WORKING_NAME);
+						
 					} else if(issueType.equals(IssueType.BUG)) {
 						
 						if(isConfirmed() && c.getOwnerId().length() != 0) {
+							addNote(c.getNote());
 							setState(WORKING_NAME);
-							addNote(c.getNote());
+							
 						}else if(isConfirmed() && c.getOwnerId().length() == 0) {
+							addNote(c.getNote());
 							setState(CONFIRMED_NAME);
-							addNote(c.getNote());
+							
 						}else if(c.getOwnerId().length() == 0) {
-							setState(NEW_NAME);
 							addNote(c.getNote());
+							setState(NEW_NAME);
+							
 						}
 						
 					}
