@@ -141,7 +141,7 @@ public class IssueTest {
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.CLOSED_NAME,exampleIssue.getStateName());
 		
-		exampleCommand = new Command(CommandValue.REOPEN,"owner",Resolution.FIXED,"example note");
+		exampleCommand = new Command(CommandValue.RESOLVE,"owner",Resolution.FIXED,"example note");
 		exampleIssue = new Issue(1,Issue.WORKING_NAME, Issue.I_BUG, "Example bug", "owner", true, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.VERIFYING_NAME,exampleIssue.getStateName());
@@ -149,12 +149,12 @@ public class IssueTest {
 		exampleCommand = new Command(CommandValue.REOPEN,"owner",Resolution.WONTFIX,"example note");
 		exampleIssue = new Issue(1,Issue.WORKING_NAME, Issue.I_BUG, "Example bug", "owner", true, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
-		assertEquals(Issue.CLOSED_NAME,exampleIssue.getStateName());
+		assertEquals(Issue.WORKING_NAME,exampleIssue.getStateName());
 		
 		exampleCommand = new Command(CommandValue.REOPEN,"owner",Resolution.WORKSFORME,"example note");
 		exampleIssue = new Issue(1,Issue.WORKING_NAME, Issue.I_BUG, "Example bug", "owner", true, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
-		assertEquals(Issue.CLOSED_NAME,exampleIssue.getStateName());
+		assertEquals(Issue.WORKING_NAME,exampleIssue.getStateName());
 		
 	}
 }

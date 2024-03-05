@@ -401,13 +401,16 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
-				if(c.getResolution().equals(resolution.FIXED)) {
-					setState(VERIFYING_NAME);
-					setResolution(Command.R_FIXED);
-					addNote(c.getNote());
-					
-				}else {
-					setState(CLOSED_NAME);
+				if(c.getCommand().equals(CommandValue.RESOLVE)) {
+					if(c.getResolution().equals(resolution.FIXED)) {
+						setState(VERIFYING_NAME);
+						setResolution(Command.R_FIXED);
+						addNote(c.getNote());
+					} else {
+						setState(CLOSED_NAME);
+						addNote(c.getNote());
+					}
+				} else {
 					if(c.getResolution().equals(Resolution.DUPLICATE) || c.getResolution().equals(Resolution.WONTFIX)) {
 						if(c.getResolution().equals(Resolution.DUPLICATE)) { setResolution(Command.R_DUPLICATE); }
 						if(c.getResolution().equals(Resolution.WONTFIX)) { setResolution(Command.R_WONTFIX); }
@@ -530,7 +533,7 @@ public class Issue {
 						}
 					}
 					
-				} else if(issueType.equals(Issue.I_ENHANCEMENT) && getOwner() == null){
+				} else if(getOwner() == null){
 					setState(NEW_NAME);
 					addNote(c.getNote());
 				} else {
