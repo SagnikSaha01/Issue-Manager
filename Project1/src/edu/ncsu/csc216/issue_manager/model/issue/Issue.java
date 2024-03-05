@@ -440,31 +440,20 @@ public class Issue {
 			 */
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.ASSIGN) && issueType.equals(IssueType.ENHANCEMENT)) {
-					try {
-						setOwner(c.getOwnerId());
-						setState(WORKING_NAME);
-						addNote(c.getNote());
-					} catch (Exception e){
-						throw new UnsupportedOperationException("Invalid information.");
-					}
+					setOwner(c.getOwnerId());
+					setState(WORKING_NAME);
+					addNote(c.getNote());
+					
 				}else if(c.getCommand().equals(CommandValue.CONFIRM) && issueType == IssueType.BUG) {
-					try {
-						
-						setState(CONFIRMED_NAME);
-						setConfirmed(true);
-						addNote(c.getNote());
-					} catch (Exception e) {
-						throw new UnsupportedOperationException("Invalid information."); 
-					}
-				}else if(c.getCommand().equals(CommandValue.RESOLVE)) {
-					try {
-						
-						setState(CLOSED_NAME);
-						addNote(c.getNote());
-						resolution = c.getResolution();
-					} catch (Exception e) {
-						throw new UnsupportedOperationException("Invalid information."); 
-					}
+					setState(CONFIRMED_NAME);
+					setConfirmed(true);
+					addNote(c.getNote());
+				} else if(c.getCommand().equals(CommandValue.RESOLVE)) {
+					setState(CLOSED_NAME);
+					addNote(c.getNote());
+					resolution = c.getResolution();
+				} else {
+					throw new UnsupportedOperationException("Invalid information."); 
 				}
 			}
 			/**
