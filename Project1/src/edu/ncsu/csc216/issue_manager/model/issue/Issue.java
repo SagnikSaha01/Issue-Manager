@@ -447,11 +447,11 @@ public class Issue {
 					setState(WORKING_NAME);
 					addNote(c.getNote());
 					
-				}else if(c.getCommand().equals(CommandValue.CONFIRM) && issueType == IssueType.BUG) {
+				} else if(c.getCommand().equals(CommandValue.CONFIRM) && issueType == IssueType.BUG) {
 					setState(CONFIRMED_NAME);
 					setConfirmed(true);
 					addNote(c.getNote());
-				} else if(c.getCommand().equals(CommandValue.RESOLVE)) {
+				} else if(c.getCommand().equals(CommandValue.RESOLVE) && c.getResolution() != null) {
 					setState(CLOSED_NAME);
 					addNote(c.getNote());
 					resolution = c.getResolution();
@@ -479,6 +479,9 @@ public class Issue {
 			 */
 
 			public void updateState(Command c) {
+				if(c.getResolution() == null) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 				if(c.getCommand().equals(CommandValue.ASSIGN)) {
 					setOwner(c.getOwnerId());
 					setState(WORKING_NAME);
