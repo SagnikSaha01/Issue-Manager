@@ -402,8 +402,8 @@ public class Issue {
 			 */
 			public void updateState(Command c) {
 				if(c.getResolution().equals(resolution.FIXED)) {
-					
 					setState(VERIFYING_NAME);
+					setResolution(Command.R_FIXED);
 					addNote(c.getNote());
 					
 				}else {
@@ -413,9 +413,8 @@ public class Issue {
 						if(c.getResolution().equals(Resolution.WONTFIX)) { setResolution(Command.R_WONTFIX); }
 						addNote(c.getNote());
 					}else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
-						addNote(c.getNote());
 						setResolution(Command.R_WORKSFORME);
-						
+						addNote(c.getNote());
 					}else {
 						throw new UnsupportedOperationException("Invalid information.");
 					}
@@ -525,19 +524,16 @@ public class Issue {
 				if(c.getCommand().equals(CommandValue.REOPEN)) {
 					resolution = null;
 					if(issueType.equals(IssueType.ENHANCEMENT) && c.getOwnerId().length() != 0) {
-						
 						setState(WORKING_NAME);
 						addNote(c.getNote());
 						
 					} else if(issueType.equals(IssueType.BUG)) {
 						
 						if(isConfirmed() && c.getOwnerId().length() != 0) {
-							
 							setState(WORKING_NAME);
 							addNote(c.getNote());
 							
 						}else if(isConfirmed() && c.getOwnerId().length() == 0) {
-							
 							setState(CONFIRMED_NAME);
 							addNote(c.getNote());
 							
