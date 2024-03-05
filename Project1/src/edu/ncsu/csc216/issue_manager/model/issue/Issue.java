@@ -453,7 +453,6 @@ public class Issue {
 					addNote(c.getNote());
 				} else if(c.getCommand().equals(CommandValue.RESOLVE)) {
 					if(c.getResolution().equals(Resolution.FIXED)) {
-						setState(CLOSED_NAME);
 						throw new UnsupportedOperationException("Invalid information."); 
 					} else {
 					setState(CLOSED_NAME);
