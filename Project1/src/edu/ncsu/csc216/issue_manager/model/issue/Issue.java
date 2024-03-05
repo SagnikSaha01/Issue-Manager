@@ -451,7 +451,7 @@ public class Issue {
 					setState(CONFIRMED_NAME);
 					setConfirmed(true);
 					addNote(c.getNote());
-				} else if(c.getCommand().equals(CommandValue.RESOLVE) && c.getResolution() != null) {
+				} else if(c.getCommand().equals(CommandValue.RESOLVE)) {
 					setState(CLOSED_NAME);
 					addNote(c.getNote());
 					resolution = c.getResolution();
