@@ -374,11 +374,11 @@ public class Issue {
 					setState(CLOSED_NAME);
 					addNote(c.getNote());
 				}else if(c.getCommand().equals(CommandValue.REOPEN)) {
-					
 					setState(WORKING_NAME);
+					setResolution("");
 					addNote(c.getNote());
 					
-				}else {
+				} else {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				
