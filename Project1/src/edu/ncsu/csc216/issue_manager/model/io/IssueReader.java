@@ -56,6 +56,7 @@ public class IssueReader {
 		while(in.hasNext()) {
 			notes.add(in.next());
 		}
+		System.out.println(data.get(5));
 		Issue newIssue = new Issue(Integer.parseInt(data.get(0)),data.get(1),data.get(2),data.get(3),data.get(4),Boolean.parseBoolean(data.get(5)),data.get(6),notes);
     	return newIssue;
     }

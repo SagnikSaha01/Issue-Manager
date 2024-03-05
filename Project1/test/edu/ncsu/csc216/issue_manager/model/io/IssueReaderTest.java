@@ -19,9 +19,10 @@ public class IssueReaderTest {
 	public void testReadIssuesFromFile(){
 		ArrayList<Issue> allIssues = new ArrayList<Issue>();
 		
-		allIssues = IssueReader.readIssuesFromFile("test-files/issue1.txt");
-		
+		allIssues = IssueReader.readIssuesFromFile("test-files/issue8.txt");
+		System.out.println(allIssues.get(0));
 		assertEquals(5,allIssues.size());
+		
 		Issue firstIssue = allIssues.get(0);
 		assertAll("Issue", 
 				() -> assertEquals(1, firstIssue.getIssueId()), 

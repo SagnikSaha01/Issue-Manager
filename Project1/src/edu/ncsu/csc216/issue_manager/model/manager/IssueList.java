@@ -28,9 +28,10 @@ public class IssueList {
 	 * @return the Id of the added issue
 	 */
 	public int addIssue(IssueType issueType, String summary, String note) {
-		issues.add(new Issue(counter,issueType,summary,note));
+		Issue current = new Issue(counter,issueType,summary,note);
+		issues.add(current);
 		counter++;
-		return counter;
+		return current.getIssueId();
 	}
 	/**
 	 * Adds the first issue from the collection of issues
