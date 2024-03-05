@@ -401,6 +401,9 @@ public class Issue {
 			 * @param c command that is responsible for updating the state
 			 */
 			public void updateState(Command c) {
+				if(c.getResolution() == null) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 				if(c.getCommand().equals(CommandValue.RESOLVE) && c.getResolution().equals(resolution.FIXED)) {
 					setState(VERIFYING_NAME);
 					setResolution(Command.R_FIXED);
