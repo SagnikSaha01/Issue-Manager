@@ -485,7 +485,7 @@ public class Issue {
 					setState(WORKING_NAME);
 					addNote(c.getNote());
 					
-				} else if(c.getResolution().equals(Resolution.WONTFIX)) {
+				} else if(c.getResolution() != null && c.getResolution().equals(Resolution.WONTFIX)) {
 					setState(CLOSED_NAME);
 					setResolution(Command.R_WONTFIX);
 					addNote(c.getNote());
