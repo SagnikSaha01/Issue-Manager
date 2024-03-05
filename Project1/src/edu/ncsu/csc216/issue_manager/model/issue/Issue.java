@@ -274,10 +274,10 @@ public class Issue {
 	 */
 	public String getResolution() {
 		if(resolution == null) {
-			return null;
-		}else if(resolution.equals(Resolution.DUPLICATE)) {
+			return "";
+		} else if(resolution.equals(Resolution.DUPLICATE)) {
 			return Command.R_DUPLICATE;
-		}else if(resolution.equals(Resolution.FIXED)) {
+		} else if(resolution.equals(Resolution.FIXED)) {
 			return Command.R_FIXED;
 		}else if(resolution.equals(Resolution.WONTFIX)) {
 			return Command.R_WONTFIX;
