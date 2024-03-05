@@ -452,11 +452,15 @@ public class Issue {
 					setConfirmed(true);
 					addNote(c.getNote());
 				} else if(c.getCommand().equals(CommandValue.RESOLVE)) {
+					if(c.getResolution().equals(Resolution.WORKSFORME) || c.getResolution().equals(Resolution.FIXED)) {
+						throw new UnsupportedOperationException("Invalid information."); 
+					} else {
 					setState(CLOSED_NAME);
 					addNote(c.getNote());
 					resolution = c.getResolution();
+					}
 				} else {
-					throw new UnsupportedOperationException("Invalid information."); 
+					throw new UnsupportedOperationException("Invalid information.");
 				}
 			}
 			/**
