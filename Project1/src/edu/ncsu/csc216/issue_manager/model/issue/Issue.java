@@ -301,7 +301,7 @@ public class Issue {
 	public String getNotesString() {
 		String out = "";
 		for(String s : notes) {
-			out = out + "\n-" + s;
+			out = out + "-" + s + "\n";
 		}
 		return out;
 	}
