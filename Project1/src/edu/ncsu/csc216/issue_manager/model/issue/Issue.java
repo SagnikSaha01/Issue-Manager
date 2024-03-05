@@ -516,21 +516,21 @@ public class Issue {
 						
 					} else if(issueType.equals(IssueType.BUG)) {
 						
-						if(isConfirmed() && getOwner().length() != 0) {
+						if(isConfirmed() && getOwner() != null) {
 							setState(WORKING_NAME);
 							addNote(c.getNote());
 							
-						}else if(isConfirmed() && getOwner().length() == 0) {
+						}else if(isConfirmed() && getOwner() == null) {
 							setState(CONFIRMED_NAME);
 							addNote(c.getNote());
 							
-						}else if(getOwner().length() == 0) {
+						}else if(getOwner() == null) {
 							setState(NEW_NAME);
 							addNote(c.getNote());
 						}
 					}
 					
-				} else if(issueType.equals(Issue.I_ENHANCEMENT) && getOwner().length() == 0){
+				} else if(issueType.equals(Issue.I_ENHANCEMENT) && getOwner() == null){
 					setState(NEW_NAME);
 					addNote(c.getNote());
 				} else {

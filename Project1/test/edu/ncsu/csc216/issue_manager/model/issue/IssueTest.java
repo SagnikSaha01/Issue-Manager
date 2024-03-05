@@ -117,17 +117,17 @@ public class IssueTest {
 		assertEquals(Issue.WORKING_NAME,exampleIssue.getStateName());
 		
 		exampleCommand = new Command(CommandValue.REOPEN,"",Resolution.WORKSFORME,"example note");
-		exampleIssue = new Issue(1,Issue.CLOSED_NAME, Issue.I_BUG, "Example bug", "owner", true, Command.R_DUPLICATE, notes);
+		exampleIssue = new Issue(1,Issue.CLOSED_NAME, Issue.I_BUG, "Example bug", "", true, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.CONFIRMED_NAME,exampleIssue.getStateName());
 		
 		exampleCommand = new Command(CommandValue.REOPEN,"",Resolution.WORKSFORME,"example note");
-		exampleIssue = new Issue(1,Issue.CLOSED_NAME, Issue.I_BUG, "Example bug", "owner", false, Command.R_DUPLICATE, notes);
+		exampleIssue = new Issue(1,Issue.CLOSED_NAME, Issue.I_BUG, "Example bug", "", false, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.NEW_NAME,exampleIssue.getStateName());
 		
 		exampleCommand = new Command(CommandValue.REOPEN,"owner",Resolution.WONTFIX,"example note");
-		exampleIssue = new Issue(1,Issue.CLOSED_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_DUPLICATE, notes);
+		exampleIssue = new Issue(1,Issue.CLOSED_NAME, Issue.I_ENHANCEMENT, "Example bug", "", false, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.WORKING_NAME,exampleIssue.getStateName());
 		
