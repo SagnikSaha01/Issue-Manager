@@ -527,10 +527,13 @@ public class Issue {
 						}else if(getOwner() == null || !isConfirmed()) {
 							setState(NEW_NAME);
 							addNote(c.getNote());
-						}
+						} 
+					} else if(getOwner() == null) {
+						setState(NEW_NAME);
+						addNote(c.getNote());
 					}
 					
-				} else if(getOwner() == null || !isConfirmed()){
+				} else if(getOwner() == null){
 					setState(NEW_NAME);
 					addNote(c.getNote());
 				} else {
