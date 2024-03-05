@@ -412,13 +412,14 @@ public class Issue {
 						if(c.getResolution().equals(Resolution.DUPLICATE)) { setResolution(Command.R_DUPLICATE); }
 						if(c.getResolution().equals(Resolution.WONTFIX)) { setResolution(Command.R_WONTFIX); }
 						addNote(c.getNote());
-					}else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
+					} else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
 						setResolution(Command.R_WORKSFORME);
 						addNote(c.getNote());
-					}else {
+					} else {
+						setResolution(c.getResolution().toString());
 						throw new UnsupportedOperationException("Invalid information.");
 					}
-				}
+				} 
 			}
 			/**
 			 * Returns the name of the State
@@ -477,13 +478,11 @@ public class Issue {
 
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.ASSIGN)) {
-					
 					setOwner(c.getOwnerId());
 					setState(WORKING_NAME);
 					addNote(c.getNote());
 					
 				} else if(c.getResolution().equals(Resolution.WONTFIX)) {
-					
 					setState(CLOSED_NAME);
 					setResolution(Command.R_WONTFIX);
 					addNote(c.getNote());
