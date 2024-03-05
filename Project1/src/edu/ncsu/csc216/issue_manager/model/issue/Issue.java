@@ -406,16 +406,15 @@ public class Issue {
 						setState(VERIFYING_NAME);
 						setResolution(Command.R_FIXED);
 						addNote(c.getNote());
-					} else {
-						setState(CLOSED_NAME);
-						addNote(c.getNote());
 					}
 				} else {
 					if(c.getResolution().equals(Resolution.DUPLICATE) || c.getResolution().equals(Resolution.WONTFIX)) {
 						if(c.getResolution().equals(Resolution.DUPLICATE)) { setResolution(Command.R_DUPLICATE); }
 						if(c.getResolution().equals(Resolution.WONTFIX)) { setResolution(Command.R_WONTFIX); }
+						setState(CLOSED_NAME);
 						addNote(c.getNote());
 					} else if(c.getResolution().equals(Resolution.WORKSFORME) && issueType == IssueType.BUG) {
+						setState(CLOSED_NAME);
 						setResolution(Command.R_WORKSFORME);
 						addNote(c.getNote());
 					} else {
