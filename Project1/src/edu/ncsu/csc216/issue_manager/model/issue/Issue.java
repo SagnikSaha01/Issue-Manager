@@ -530,7 +530,7 @@ public class Issue {
 						}
 					}
 					
-				} else if(getOwner() == null){
+				} else if(getOwner() == null || !isConfirmed()){
 					setState(NEW_NAME);
 					addNote(c.getNote());
 				} else {
