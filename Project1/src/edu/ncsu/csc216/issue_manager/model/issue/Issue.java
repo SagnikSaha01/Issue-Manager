@@ -416,7 +416,6 @@ public class Issue {
 						setResolution(Command.R_WORKSFORME);
 						addNote(c.getNote());
 					} else {
-						setResolution(c.getResolution().toString());
 						throw new UnsupportedOperationException("Invalid information.");
 					}
 				} 
@@ -517,21 +516,23 @@ public class Issue {
 						
 					} else if(issueType.equals(IssueType.BUG)) {
 						
-						if(isConfirmed() && c.getOwnerId().length() != 0) {
+						if(isConfirmed() && getOwner().length() != 0) {
 							setState(WORKING_NAME);
 							addNote(c.getNote());
 							
-						}else if(isConfirmed() && c.getOwnerId().length() == 0) {
+						}else if(isConfirmed() && getOwner().length() == 0) {
 							setState(CONFIRMED_NAME);
 							addNote(c.getNote());
 							
-						}else if(c.getOwnerId().length() == 0) {
+						}else if(getOwner().length() == 0) {
 							setState(NEW_NAME);
 							addNote(c.getNote());
 						}
-						
 					}
 					
+				} else if(issueType.equals(Issue.I_ENHANCEMENT) && getOwner().length() == 0){
+					setState(NEW_NAME);
+					addNote(c.getNote());
 				} else {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
