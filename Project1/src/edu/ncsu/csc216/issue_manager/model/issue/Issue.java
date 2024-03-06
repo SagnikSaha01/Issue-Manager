@@ -107,7 +107,7 @@ public class Issue {
 		if(state.equals(CONFIRMED_NAME) && !resolution.equals("")) {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(issueType.equals(I_ENHANCEMENT) && resolution.equals(Resolution.WORKSFORME)) {
+		if(issueType.equals(I_ENHANCEMENT) && resolution.equals(Command.R_WORKSFORME)) {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		setIssueId(issueId);

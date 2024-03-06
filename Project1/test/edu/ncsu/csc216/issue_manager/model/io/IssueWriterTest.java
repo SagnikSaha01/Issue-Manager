@@ -25,7 +25,7 @@ public class IssueWriterTest {
 	@Test
 	public void testwriteIssuesToFile() {
 		IssueManager m = new IssueManager();
-		m.loadIssuesFromFile("test-files/issue2.txt");
+		m.loadIssuesFromFile("test-files/issue1.txt");
 		m.saveIssuesToFile("test-files/issue_list.txt");
 		Exception e = assertThrows(IllegalArgumentException.class,
 				() -> m.saveIssuesToFile("test-files/issue7.txt"));
