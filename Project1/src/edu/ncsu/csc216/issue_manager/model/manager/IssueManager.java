@@ -27,7 +27,7 @@ public class IssueManager {
 	 */
 	public void loadIssuesFromFile(String fileName) {
 		try {
-			createNewIssueList();
+			issueList = new IssueList();
 			issueList.addIssues(IssueReader.readIssuesFromFile(fileName));
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Invalid input.");
