@@ -29,6 +29,7 @@ public class IssueList {
 	 */
 	public int addIssue(IssueType issueType, String summary, String note) {
 		Issue current = new Issue(counter,issueType,summary,note);
+		
 		issues.add(current);
 		counter++;
 		return current.getIssueId();
@@ -38,7 +39,6 @@ public class IssueList {
 	 * @param issues total collection of issues 
 	 */
 	public void addIssues(List<Issue> issues) {
-		System.out.println("ran");
 		for(Issue i : issues) {
 			boolean duplicate = false;
 			for(Issue o : this.issues) {

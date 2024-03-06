@@ -2,6 +2,8 @@ package edu.ncsu.csc216.issue_manager.model.manager;
 
 
 
+import java.util.List;
+
 import edu.ncsu.csc216.issue_manager.model.command.Command;
 import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
 import edu.ncsu.csc216.issue_manager.model.io.IssueWriter;
@@ -84,15 +86,14 @@ public class IssueManager {
 	 * @return an array with the specified issue type
 	 */
 	public Object[][] getIssueListAsArrayByIssueType(String type) {
-		Object[][] output = new Object[issueList.getIssues().size()][4];
-		for(int i = 0; i < issueList.getIssues().size(); i++) {
-			Issue current = issueList.getIssues().get(i);
-			if(current.getIssueType().equals(type)) {
-				output[i][0] = current.getIssueId();
-				output[i][1] = current.getStateName();
-				output[i][2] = current.getIssueType();
-				output[i][3] = current.getSummary();
-			}
+		List<Issue> byType = issueList.getIssuesByType(type);
+		Object[][] output = new Object[byType.size()][4];
+		for(int i = 0; i < byType.size(); i++) {
+			Issue current = byType.get(i);
+			output[i][0] = current.getIssueId();
+			output[i][1] = current.getStateName();
+			output[i][2] = current.getIssueType();
+			output[i][3] = current.getSummary();
 		}
 		return output;
 	}

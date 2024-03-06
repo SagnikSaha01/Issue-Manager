@@ -21,7 +21,7 @@ public class IssueManagerTest {
 		
 		assertEquals(1,manager.getIssueById(1).getIssueId());
 		
-		manager.addIssueToList(IssueType.BUG, "summary", "note");
+		
 		assertEquals("Issue description", manager.getIssueById(3).getSummary());
 		
 		Object[][] testArray = manager.getIssueListAsArray();
@@ -30,11 +30,14 @@ public class IssueManagerTest {
 		assertEquals(Issue.I_ENHANCEMENT,testArray[0][2]);
 		assertEquals("Issue description",testArray[0][3]);
 		testArray = manager.getIssueListAsArrayByIssueType(Issue.I_BUG);
-		assertEquals(3,testArray[0][0]);
+		assertEquals(2,testArray.length);
 		assertEquals(Issue.CONFIRMED_NAME,testArray[0][1]);
 		assertEquals(Issue.I_BUG,testArray[0][2]);
 		assertEquals("Issue description",testArray[0][3]);
-		
+
+		manager = new IssueManager();
+		manager.addIssueToList(IssueType.BUG, "summary", "note");
+				
 	}
 	
 }
