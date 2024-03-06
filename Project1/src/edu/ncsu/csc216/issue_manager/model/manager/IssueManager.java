@@ -16,6 +16,7 @@ public class IssueManager {
 	private IssueList issueList;
 	
 	public IssueManager() {
+		System.out.println("construct");
 		createNewIssueList();
 	}
 	/**
@@ -34,6 +35,7 @@ public class IssueManager {
 	 * Creates a new issue list
 	 */
 	public void createNewIssueList() {
+		System.out.println("create");
 		issueList = new IssueList();
 	}
 	/**
