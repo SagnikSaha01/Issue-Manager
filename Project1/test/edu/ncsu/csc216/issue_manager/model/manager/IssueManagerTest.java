@@ -17,7 +17,7 @@ public class IssueManagerTest {
 	public void testIssueManager() {
 		IssueManager manager = new IssueManager();
 		
-		manager.loadIssuesFromFile("test-files/issue2.txt");
+		manager.loadIssuesFromFile("test-files/issue1.txt");
 		
 		assertEquals(1,manager.getIssueById(1).getIssueId());
 		

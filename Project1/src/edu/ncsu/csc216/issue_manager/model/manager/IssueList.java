@@ -38,6 +38,7 @@ public class IssueList {
 	 * @param issues total collection of issues 
 	 */
 	public void addIssues(List<Issue> issues) {
+		this.issues.clear();
 		for(Issue i : issues) {
 			boolean duplicate = false;
 			int pos = 0;
