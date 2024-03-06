@@ -74,6 +74,9 @@ public class IssueList {
 	 * @return list of issues that are only the given type
 	 */
 	public List<Issue> getIssuesByType(String issueType){
+		if(issueType != Issue.I_BUG || issueType != Issue.I_ENHANCEMENT) {
+			throw new IllegalArgumentException("Invalid Issue Type.");
+		}
 		List<Issue> output = new ArrayList<>();
 		for(Issue i : issues) {
 			if(i.getIssueType().equals(issueType)) {
