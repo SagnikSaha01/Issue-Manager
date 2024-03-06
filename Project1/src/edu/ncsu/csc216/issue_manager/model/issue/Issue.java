@@ -110,9 +110,6 @@ public class Issue {
 		if(issueType.equals(I_ENHANCEMENT) && resolution.equals(Command.R_WORKSFORME)) {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(issueId < 1) {
-			throw new IllegalArgumentException("Issue cannot be created.");
-		}
 		setIssueId(issueId);
 		setOwner(owner);
 		setIssueType(issueType);

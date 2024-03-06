@@ -42,6 +42,9 @@ public class IssueReader {
 	 * @return the issue that is processed
 	 */
     private static Issue processIssue(String line) throws IllegalArgumentException{
+    	if(line.substring(0,1).equals("-")) {
+    		throw new IllegalArgumentException("Issue cannot be created.");
+    	}
     	Scanner in = new Scanner(line).useDelimiter("\r?\n?[-]");
     	String issueObject = in.next();
     	Scanner issueParse = new Scanner(issueObject).useDelimiter(",");
