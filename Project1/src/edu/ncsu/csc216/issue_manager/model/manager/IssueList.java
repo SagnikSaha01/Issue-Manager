@@ -41,16 +41,20 @@ public class IssueList {
 	public void addIssues(List<Issue> issues) {
 		for(Issue i : issues) {
 			boolean duplicate = false;
+			int pos = 0;
 			for(Issue o : this.issues) {
 				if(o.getIssueId() == i.getIssueId()) {
-					
 					duplicate = true;
+				} else if(o.getIssueId() > i.getIssueId()) {
+					break;
 				}
+				pos++;
 			}
 			if(!duplicate) {
-				addIssue(i);
+				this.issues.add(pos,i);
 			}
 		}
+		
 	}
 	/**
 	 * Helps check for any duplicate issues that are already added
