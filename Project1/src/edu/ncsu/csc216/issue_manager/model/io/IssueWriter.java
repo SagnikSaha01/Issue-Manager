@@ -24,11 +24,11 @@ public class IssueWriter {
 				for (Issue i : issueList) {
 					fileWriter.println(i.toString());
 				}
-				fileWriter.close();
+				
 			} catch (Exception e) {
 				throw new IllegalArgumentException("Unable to save to file.");
 			}
-		
+			fileWriter.close();
     	
     	
 	}
