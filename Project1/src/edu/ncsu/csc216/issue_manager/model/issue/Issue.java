@@ -320,7 +320,7 @@ public class Issue {
 	}
 	public String toString() {
 		String out = "*";
-		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + issueType.toString() + "," + summary + "," + owner + "," + confirmed + ",";
+		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + getIssueType() + "," + summary + "," + owner + "," + confirmed + ",";
 		if(resolution == null) {
 			out = out + "";
 		} else {
