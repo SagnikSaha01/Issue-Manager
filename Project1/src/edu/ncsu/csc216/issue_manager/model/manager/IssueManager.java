@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
 import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
@@ -15,8 +16,9 @@ public class IssueManager {
 	
 	private IssueList issueList;
 	
+	private static IssueManager singleton;
+	
 	public IssueManager() {
-		System.out.println("construct");
 		createNewIssueList();
 	}
 	/**
@@ -51,8 +53,10 @@ public class IssueManager {
 	 * @return the issue manager instance
 	 */
 	public static IssueManager getInstance() {
-		// TODO Auto-generated method stub
-		return null;
+		 if (singleton == null) {
+			singleton = new IssueManager();
+		}
+		return singleton;
 	}
 	/**
 	 * Gets the issue list as a 2 dimensional array
