@@ -29,7 +29,6 @@ public class IssueList {
 	 */
 	public int addIssue(IssueType issueType, String summary, String note) {
 		Issue current = new Issue(counter,issueType,summary,note);
-		
 		issues.add(current);
 		counter++;
 		return current.getIssueId();
@@ -120,8 +119,8 @@ public class IssueList {
 	 */
 	public void deleteIssueById(int index) {
 		if(index < issues.size() && index > -1) {
-			for(Issue i : issues) {
-				if(i.getIssueId() == index) {
+			for(int i = 0; i < issues.size(); i++) {
+				if(issues.get(i).getIssueId() == index) {
 					issues.remove(i);
 				}
 			}
