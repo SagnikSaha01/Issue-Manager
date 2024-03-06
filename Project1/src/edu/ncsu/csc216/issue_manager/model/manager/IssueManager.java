@@ -45,8 +45,11 @@ public class IssueManager {
 	 * @param fileName file name where the issues will be saved 
 	 */
 	public void saveIssuesToFile(String fileName) {
-		IssueWriter.writeIssuesToFile(fileName, issueList.getIssues());
-		
+		try {
+			IssueWriter.writeIssuesToFile(fileName, issueList.getIssues());
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Unable to save to file.");
+		}
 	}
 	/**
 	 * Gets the instance of the issue manager

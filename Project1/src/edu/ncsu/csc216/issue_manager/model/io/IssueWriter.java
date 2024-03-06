@@ -17,18 +17,14 @@ public class IssueWriter {
 	 * @param fileName name of the file that stores the data
 	 * @param issueList list of the issues that will be saved
 	 */
-	public static void writeIssuesToFile(String fileName, List<Issue> issueList) {
-		
-		try {
+	public static void writeIssuesToFile(String fileName, List<Issue> issueList) throws IOException {
 			PrintStream fileWriter = new PrintStream(new File(fileName));
 			
 			for (Issue i : issueList) {
 				fileWriter.println(i.toString());
 			}
-			
-		} catch (FileNotFoundException e) {
-			throw new IllegalArgumentException("Unable to save to file.");
-		}
+			fileWriter.close();
+		
     	
     	
 	}
