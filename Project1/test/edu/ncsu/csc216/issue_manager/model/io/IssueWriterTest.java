@@ -28,12 +28,11 @@ public class IssueWriterTest {
 		
 		ArrayList<Issue> issues = IssueReader.readIssuesFromFile("test-files/issue2.txt");
 		IssueWriter.writeIssuesToFile("test-files/issue_list.txt", issues);
-		/*
 		Exception e = assertThrows(IllegalArgumentException.class,
 				() -> IssueWriter.writeIssuesToFile("test-files/issue7.txt", issues));
 				assertEquals(e.getMessage(),"Unable to save to file.");	
 		checkFiles("test-files/issue_list.txt","test-files/issue1.txt");
-		*/
+		
 		
 	}
 		/**
