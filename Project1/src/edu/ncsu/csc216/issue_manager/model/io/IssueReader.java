@@ -19,7 +19,7 @@ public class IssueReader {
 		Scanner fileReader = null;
 		try {
 			fileReader = new Scanner(new FileInputStream(fileName));
-		} catch (FileNotFoundException e) {	
+		} catch (Exception e) {	
 			throw new IllegalArgumentException("Unable to load file");
 		}  
  	    ArrayList<Issue> issues = new ArrayList<Issue>();

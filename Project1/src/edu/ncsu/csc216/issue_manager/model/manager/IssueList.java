@@ -38,15 +38,25 @@ public class IssueList {
 	 * @param issues total collection of issues 
 	 */
 	public void addIssues(List<Issue> issues) {
+		System.out.println("ran");
 		for(Issue i : issues) {
-			this.issues.add(i);
+			boolean duplicate = false;
+			for(Issue o : this.issues) {
+				if(o.getIssueId() == i.getIssueId()) {
+					
+					duplicate = true;
+				}
+			}
+			if(!duplicate) {
+				addIssue(i);
+			}
 		}
 	}
 	/**
 	 * Helps check for any duplicate issues that are already added
 	 */
-	private void addIssue() {
-		
+	private void addIssue(Issue i) {
+		issues.add(i);
 	}
 	/**
 	 * Returns all the issues in the form of a list

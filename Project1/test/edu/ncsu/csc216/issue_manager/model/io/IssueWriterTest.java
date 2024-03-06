@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
+import edu.ncsu.csc216.issue_manager.model.manager.IssueManager;
 
 
 /**
@@ -23,13 +24,11 @@ public class IssueWriterTest {
 	 */
 	@Test
 	public void testwriteIssuesToFile() {
-		
-		
-		
-		ArrayList<Issue> issues = IssueReader.readIssuesFromFile("test-files/issue2.txt");
-		IssueWriter.writeIssuesToFile("test-files/issue_list.txt", issues);
+		IssueManager m = new IssueManager();
+		m.loadIssuesFromFile("test-files/issue2.txt");
+		m.saveIssuesToFile("test-files/issue_list.txt");
 		Exception e = assertThrows(IllegalArgumentException.class,
-				() -> IssueWriter.writeIssuesToFile("test-files/issue7.txt", issues));
+				() -> m.saveIssuesToFile("test-files/issue7.txt"));
 				assertEquals(e.getMessage(),"Unable to save to file.");	
 		checkFiles("test-files/issue_list.txt","test-files/issue1.txt");
 		
