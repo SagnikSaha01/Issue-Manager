@@ -104,6 +104,9 @@ public class Issue {
 		if(issueType.equals(I_ENHANCEMENT) && confirmed) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
+		if(state.equals(CONFIRMED_NAME) && !resolution.equals("")) {
+			throw new IllegalArgumentException("Issue cannot be created.");
+		}
 		setIssueId(issueId);
 		setOwner(owner);
 		setIssueType(issueType);
