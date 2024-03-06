@@ -330,12 +330,8 @@ public class Issue {
 	 */
 	public String toString() {
 		String out = "*";
-		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + getIssueType() + "," + summary + ",";
-		if(owner == null) {
-			out = out + "" + "," + confirmed + ",";
-		} else {
-			out = out + owner + "," + confirmed + ",";
-		}
+		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + getIssueType() + "," + summary + "," + owner + "," + confirmed + ",";
+		
 		if(resolution == null) {
 			out = out + "";
 		} else {

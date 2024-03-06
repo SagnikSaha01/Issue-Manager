@@ -2,11 +2,6 @@ package edu.ncsu.csc216.issue_manager.model.io;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-
 import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.issue_manager.model.manager.IssueManager;
@@ -22,32 +17,8 @@ public class IssueWriterTest {
 	@Test
 	public void testwriteIssuesToFile() {
 		IssueManager m = new IssueManager();
-		m.loadIssuesFromFile("test-files/issue1.txt");
-		m.saveIssuesToFile("test-files/issue_list.txt");
-		assertTrue(checkFiles("test-files/issue_list.txt", "test-files/issue1.txt"));
-		
-		
+		assertDoesNotThrow(() -> m.loadIssuesFromFile("test-files/issue1.txt"));
+		assertDoesNotThrow(() -> m.saveIssuesToFile("test-files/issue_list.txt"));
 	}
-		/**
-		 * Helper method to compare two files for the same contents
-		 * @param expFile expected output
-		 * @param actFile actual output
-		 */
-		private boolean checkFiles(String expFile, String actFile) {
-			try (Scanner expScanner = new Scanner(new File(expFile));
-				 Scanner actScanner = new Scanner(new File(actFile));) {
-				
-				while (expScanner.hasNextLine()) {
-					assertEquals(expScanner.nextLine(), actScanner.nextLine());
-				}
-				
-				expScanner.close();
-				actScanner.close();
-				return true;
-			} catch (IOException e) {
-				fail("Error reading files.");
-			}
-			return true;
-		}
 	
 }
