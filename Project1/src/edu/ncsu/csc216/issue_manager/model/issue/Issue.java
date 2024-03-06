@@ -324,7 +324,7 @@ public class Issue {
 		if(resolution == null) {
 			out = out + "";
 		} else {
-			out = out + resolution.toString();
+			out = out + getResolution();
 		}
 		for(String note : notes) {
 			out = out + "\n-" + note;
