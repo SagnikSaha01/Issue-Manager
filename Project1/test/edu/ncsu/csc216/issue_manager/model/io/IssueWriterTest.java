@@ -24,7 +24,7 @@ public class IssueWriterTest {
 		IssueManager m = new IssueManager();
 		m.loadIssuesFromFile("test-files/issue1.txt");
 		m.saveIssuesToFile("test-files/issue_list.txt");
-		checkFiles("test-files/issue_list.txt", "test-files/issue1.txt");
+		assertTrue(checkFiles("test-files/issue_list.txt", "test-files/issue1.txt"));
 		
 		
 	}
@@ -33,7 +33,7 @@ public class IssueWriterTest {
 		 * @param expFile expected output
 		 * @param actFile actual output
 		 */
-		private void checkFiles(String expFile, String actFile) {
+		private boolean checkFiles(String expFile, String actFile) {
 			try (Scanner expScanner = new Scanner(new File(expFile));
 				 Scanner actScanner = new Scanner(new File(actFile));) {
 				
@@ -43,9 +43,11 @@ public class IssueWriterTest {
 				
 				expScanner.close();
 				actScanner.close();
+				return true;
 			} catch (IOException e) {
 				fail("Error reading files.");
 			}
+			return true;
 		}
 	
 }
