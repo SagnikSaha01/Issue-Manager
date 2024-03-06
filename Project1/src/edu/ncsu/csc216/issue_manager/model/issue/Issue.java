@@ -95,7 +95,7 @@ public class Issue {
 		if(issueType.equals(I_BUG) && state.equals(WORKING_NAME) && confirmed == false) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(state.equals(VERIFYING_NAME) && issueType.equals(I_BUG) && !resolution.equals(Command.R_FIXED)) {
+		if(state.equals(VERIFYING_NAME) && !resolution.equals(Command.R_FIXED)) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(state.equals(CLOSED_NAME) && (resolution == null || resolution.length() == 0)) {

@@ -31,10 +31,10 @@ public class IssueTest {
 		assertNull(exampleIssue.getResolution());
 		assertEquals(notes, exampleIssue.getNotes());
 		
-		exampleIssue = new Issue(1,Issue.VERIFYING_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_DUPLICATE, notes);
+		exampleIssue = new Issue(1,Issue.VERIFYING_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_FIXED, notes);
 		assertEquals(Issue.VERIFYING_NAME,exampleIssue.getStateName());
 		assertEquals(Issue.I_ENHANCEMENT,exampleIssue.getIssueType());
-		assertEquals(Command.R_DUPLICATE, exampleIssue.getResolution());
+		assertEquals(Command.R_FIXED, exampleIssue.getResolution());
 		exampleIssue = new Issue(1,Issue.WORKING_NAME, Issue.I_BUG, "Example bug", "owner", true, Command.R_WONTFIX, notes);
 		assertEquals(Command.R_WONTFIX, exampleIssue.getResolution());
 		assertEquals(Issue.WORKING_NAME,exampleIssue.getStateName());
@@ -86,13 +86,13 @@ public class IssueTest {
 	public void testTransitions() {
 		ArrayList<String> notes = new ArrayList<String>();
 		notes.add("Example note 1");
-		Issue exampleIssue = new Issue(1,Issue.VERIFYING_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_DUPLICATE, notes);
+		Issue exampleIssue = new Issue(1,Issue.VERIFYING_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_FIXED, notes);
 		Command exampleCommand = new Command(CommandValue.VERIFY,"owner",Resolution.WONTFIX,"example note");
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.CLOSED_NAME,exampleIssue.getStateName());
 		
 		exampleCommand = new Command(CommandValue.REOPEN,"owner",Resolution.WONTFIX,"example note");
-		exampleIssue = new Issue(1,Issue.VERIFYING_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_DUPLICATE, notes);
+		exampleIssue = new Issue(1,Issue.VERIFYING_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_FIXED, notes);
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.WORKING_NAME,exampleIssue.getStateName());
 		
