@@ -20,7 +20,7 @@ public class IssueReaderTest {
 		ArrayList<Issue> allIssues = new ArrayList<Issue>();
 		
 		allIssues = IssueReader.readIssuesFromFile("test-files/issue1.txt");
-		assertEquals(5,allIssues.size());
+		assertEquals(5, allIssues.size());
 		
 		Issue firstIssue = allIssues.get(0);
 		assertAll("Issue", 

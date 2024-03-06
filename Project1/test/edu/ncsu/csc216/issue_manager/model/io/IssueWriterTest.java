@@ -5,13 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import edu.ncsu.csc216.issue_manager.model.command.Command;
-import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.manager.IssueManager;
 
 
@@ -27,7 +24,7 @@ public class IssueWriterTest {
 		IssueManager m = new IssueManager();
 		m.loadIssuesFromFile("test-files/issue1.txt");
 		m.saveIssuesToFile("test-files/issue_list.txt");
-		checkFiles("test-files/issue_list.txt","test-files/issue1.txt");
+		checkFiles("test-files/issue_list.txt", "test-files/issue1.txt");
 		
 		
 	}

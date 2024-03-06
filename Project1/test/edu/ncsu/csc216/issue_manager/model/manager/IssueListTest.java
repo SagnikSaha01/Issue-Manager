@@ -22,12 +22,12 @@ public class IssueListTest {
 		IssueList list = new IssueList();
 		
 		list.addIssue(IssueType.BUG, "summary", "note");
-		assertEquals(1,list.getIssues().size());
-		assertEquals(1,list.getIssueById(1).getIssueId());
-		assertEquals("summary",list.getIssueById(1).getSummary());
+		assertEquals(1, list.getIssues().size());
+		assertEquals(1, list.getIssueById(1).getIssueId());
+		assertEquals("summary", list.getIssueById(1).getSummary());
 		
-		assertEquals(1,list.getIssuesByType(Issue.I_BUG).size());
-		assertEquals(0,list.getIssuesByType(Issue.I_ENHANCEMENT).size());
+		assertEquals(1, list.getIssuesByType(Issue.I_BUG).size());
+		assertEquals(0, list.getIssuesByType(Issue.I_ENHANCEMENT).size());
 	}
 	
 	

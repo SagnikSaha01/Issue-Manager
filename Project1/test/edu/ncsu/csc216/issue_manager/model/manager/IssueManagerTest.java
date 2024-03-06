@@ -19,21 +19,21 @@ public class IssueManagerTest {
 		
 		manager.loadIssuesFromFile("test-files/issue1.txt");
 		
-		assertEquals(1,manager.getIssueById(1).getIssueId());
+		assertEquals(1, manager.getIssueById(1).getIssueId());
 		
 		
 		assertEquals("Issue description", manager.getIssueById(3).getSummary());
 		
 		Object[][] testArray = manager.getIssueListAsArray();
-		assertEquals(1,testArray[0][0]);
-		assertEquals(Issue.NEW_NAME,testArray[0][1]);
-		assertEquals(Issue.I_ENHANCEMENT,testArray[0][2]);
-		assertEquals("Issue description",testArray[0][3]);
+		assertEquals(1, testArray[0][0]);
+		assertEquals(Issue.NEW_NAME, testArray[0][1]);
+		assertEquals(Issue.I_ENHANCEMENT, testArray[0][2]);
+		assertEquals("Issue description", testArray[0][3]);
 		testArray = manager.getIssueListAsArrayByIssueType(Issue.I_BUG);
-		assertEquals(2,testArray.length);
-		assertEquals(Issue.CONFIRMED_NAME,testArray[0][1]);
-		assertEquals(Issue.I_BUG,testArray[0][2]);
-		assertEquals("Issue description",testArray[0][3]);
+		assertEquals(2, testArray.length);
+		assertEquals(Issue.CONFIRMED_NAME, testArray[0][1]);
+		assertEquals(Issue.I_BUG, testArray[0][2]);
+		assertEquals("Issue description", testArray[0][3]);
 
 		manager = new IssueManager();
 		manager.addIssueToList(IssueType.BUG, "summary", "note");

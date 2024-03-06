@@ -82,7 +82,7 @@ public class IssueManager {
 	}
 	/**
 	 * Gets the list of issues of a specific type 
-	 * @param string the type of issues to retrieve
+	 * @param type the type of issues to retrieve
 	 * @return an array with the specified issue type
 	 */
 	public Object[][] getIssueListAsArrayByIssueType(String type) {
@@ -119,7 +119,7 @@ public class IssueManager {
 	 * @param note any additional notes of the issue
 	 */
 	public void addIssueToList(IssueType type, String summary, String note) {
-		issueList.addIssue(type,summary,note);
+		issueList.addIssue(type, summary, note);
 	}
 	
 }

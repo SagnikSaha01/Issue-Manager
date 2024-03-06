@@ -92,7 +92,7 @@ public class Issue {
 		if(issueType.equals(I_ENHANCEMENT) && state.equals(CONFIRMED_NAME)) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(issueType.equals(I_BUG) && state.equals(WORKING_NAME) && confirmed == false) {
+		if(issueType.equals(I_BUG) && state.equals(WORKING_NAME) && !confirmed) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(state.equals(VERIFYING_NAME) && !resolution.equals(Command.R_FIXED)) {
@@ -104,7 +104,7 @@ public class Issue {
 		if(issueType.equals(I_ENHANCEMENT) && confirmed) {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
-		if(state.equals(CONFIRMED_NAME) && !resolution.equals("")) {
+		if(state.equals(CONFIRMED_NAME) && !"".equals(resolution)) {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(issueType.equals(I_ENHANCEMENT) && resolution.equals(Command.R_WORKSFORME)) {
@@ -145,15 +145,15 @@ public class Issue {
 	private void setState(String state) {
 		if(state.equals(CLOSED_NAME)) {
 			this.state = closedState;
-		}else if (state.equals(CONFIRMED_NAME)) {
+		} else if (state.equals(CONFIRMED_NAME)) {
 			this.state = confirmedState;
-		}else if(state.equals(NEW_NAME)) {
+		} else if(state.equals(NEW_NAME)) {
 			this.state = newState;
-		}else if(state.equals(VERIFYING_NAME)) {
+		} else if(state.equals(VERIFYING_NAME)) {
 			this.state = verifyingState;
-		}else if(state.equals(WORKING_NAME)) {
+		} else if(state.equals(WORKING_NAME)) {
 			this.state = workingState;
-		}else {
+		} else {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 	}
@@ -164,9 +164,9 @@ public class Issue {
 	private void setIssueType(String issueType) {
 		 if(issueType.equals(I_ENHANCEMENT)) {
 			 this.issueType = IssueType.ENHANCEMENT;
-		 }else if(issueType.equals(I_BUG)) {
+		 } else if(issueType.equals(I_BUG)) {
 			 this.issueType = IssueType.BUG;
-		 }else {
+		 } else {
 			 throw new IllegalArgumentException("Issue cannot be created.");
 		 }
 	}
@@ -184,15 +184,15 @@ public class Issue {
 	private void setResolution(String resolution) {
 		if(resolution.length() == 0) {
 			this.resolution = null;
-		}else if(resolution.equals(Command.R_FIXED)) {
+		} else if(resolution.equals(Command.R_FIXED)) {
 			this.resolution = Resolution.FIXED;
-		}else if(resolution.equals(Command.R_DUPLICATE)) {
+		} else if(resolution.equals(Command.R_DUPLICATE)) {
 			this.resolution = Resolution.DUPLICATE;
-		}else if(resolution.equals(Command.R_WONTFIX)) {
+		} else if(resolution.equals(Command.R_WONTFIX)) {
 			this.resolution = Resolution.WONTFIX;
-		}else if(resolution.equals(Command.R_WORKSFORME)) {
+		} else if(resolution.equals(Command.R_WORKSFORME)) {
 			this.resolution = Resolution.WORKSFORME;
-		}else {
+		} else {
 			throw new IllegalArgumentException("Issue cannot be created.");
 		}
 	}
@@ -261,9 +261,9 @@ public class Issue {
 	 * @return enhancement or bug based on the type 
 	 */
 	public String getIssueType() {
-		if(issueType.equals(issueType.BUG)) {
+		if(issueType.equals(IssueType.BUG)) {
 			return I_BUG;
-		}else {
+		} else {
 			return I_ENHANCEMENT;
 		}
 	}
@@ -285,9 +285,9 @@ public class Issue {
 			return Command.R_DUPLICATE;
 		} else if(resolution.equals(Resolution.FIXED)) {
 			return Command.R_FIXED;
-		}else if(resolution.equals(Resolution.WONTFIX)) {
+		} else if(resolution.equals(Resolution.WONTFIX)) {
 			return Command.R_WONTFIX;
-		}else if(resolution.equals(Resolution.WORKSFORME)) {
+		} else if(resolution.equals(Resolution.WORKSFORME)) {
 			return Command.R_WORKSFORME;
 		} else {
 			return null;
@@ -324,13 +324,17 @@ public class Issue {
 		}
 		notes.add("[" + this.state.getStateName() + "] " + note);
 	}
+	/**
+	 * Converts issue object to a string format
+	 * @return String the output of the issue
+	 */
 	public String toString() {
 		String out = "*";
 		out = out + Integer.toString(issueId) + "," + state.getStateName() + "," + getIssueType() + "," + summary + ",";
 		if(owner == null) {
 			out = out + "" + "," + confirmed + ",";
 		} else {
-			out = out + owner + "," + confirmed + ",";;
+			out = out + owner + "," + confirmed + ",";
 		}
 		if(resolution == null) {
 			out = out + "";
@@ -384,7 +388,7 @@ public class Issue {
 				if(c.getCommand().equals(CommandValue.VERIFY)) {
 					setState(CLOSED_NAME);
 					addNote(c.getNote());
-				}else if(c.getCommand().equals(CommandValue.REOPEN)) {
+				} else if(c.getCommand().equals(CommandValue.REOPEN)) {
 					setState(WORKING_NAME);
 					setResolution("");
 					addNote(c.getNote());
@@ -415,7 +419,7 @@ public class Issue {
 				if(c.getResolution() == null) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
-				if(c.getCommand().equals(CommandValue.RESOLVE) && c.getResolution().equals(resolution.FIXED)) {
+				if(c.getCommand().equals(CommandValue.RESOLVE) && c.getResolution().equals(Resolution.FIXED)) {
 					setState(VERIFYING_NAME);
 					setResolution(Command.R_FIXED);
 					addNote(c.getNote());
@@ -541,11 +545,11 @@ public class Issue {
 							setState(WORKING_NAME);
 							addNote(c.getNote());
 							
-						}else if(isConfirmed() && getOwner() == null) {
+						} else if(isConfirmed() && getOwner() == null) {
 							setState(CONFIRMED_NAME);
 							addNote(c.getNote());
 							
-						}else if(getOwner() == null || !isConfirmed()) {
+						} else if(getOwner() == null || !isConfirmed()) {
 							setState(NEW_NAME);
 							addNote(c.getNote());
 						} 

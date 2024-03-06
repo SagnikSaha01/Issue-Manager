@@ -27,22 +27,22 @@ public class IssueReader {
  	    while (fileReader.hasNextLine()) { 
  	       text = text + fileReader.nextLine() + '\n';
  	    }
- 	    text = text.substring(0,text.length()-1);
+ 	    text = text.substring(0, text.length() - 1);
  	    Scanner issueDelimeter = new Scanner(text).useDelimiter("\\r?\\n?[*]");
  	    while(issueDelimeter.hasNextLine()) {
  	    	String issueLine = issueDelimeter.next();
  	    	issues.add(processIssue(issueLine));
  	    }
- 	    
+ 	    issueDelimeter.close();
  	    return issues;
 	}
 	/**
 	 * Processes the issues from the file
-	 * @param fileName file from which issues will be processed
+	 * @param line the line from which issues will be processed
 	 * @return the issue that is processed
 	 */
     private static Issue processIssue(String line) throws IllegalArgumentException{
-    	if(line.substring(0,1).equals("-")) {
+    	if(line.substring(0, 1).equals("-")) {
     		throw new IllegalArgumentException("Issue cannot be created.");
     	}
     	Scanner in = new Scanner(line).useDelimiter("\r?\n?[-]");
@@ -59,7 +59,9 @@ public class IssueReader {
 		while(in.hasNext()) {
 			notes.add(in.next());
 		}
-		Issue newIssue = new Issue(Integer.parseInt(data.get(0)),data.get(1),data.get(2),data.get(3),data.get(4),Boolean.parseBoolean(data.get(5)),data.get(6),notes);
+		Issue newIssue = new Issue(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), data.get(4), Boolean.parseBoolean(data.get(5)), data.get(6), notes);
+		issueParse.close();
+		in.close();
     	return newIssue;
     }
 }
