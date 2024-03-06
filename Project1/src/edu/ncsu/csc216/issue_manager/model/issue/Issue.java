@@ -454,10 +454,12 @@ public class Issue {
 				} else if(c.getCommand().equals(CommandValue.RESOLVE)) {
 					if(c.getResolution().equals(Resolution.FIXED)) {
 						throw new UnsupportedOperationException("Invalid information."); 
+					} else if(c.getResolution().equals(Resolution.WORKSFORME) && getIssueType().equals(I_ENHANCEMENT)){
+						throw new UnsupportedOperationException("Invalid information."); 
 					} else {
-					setState(CLOSED_NAME);
-					addNote(c.getNote());
-					resolution = c.getResolution();
+						setState(CLOSED_NAME);
+						addNote(c.getNote());
+						resolution = c.getResolution();
 					}
 				} else {
 					throw new UnsupportedOperationException("Invalid information.");
