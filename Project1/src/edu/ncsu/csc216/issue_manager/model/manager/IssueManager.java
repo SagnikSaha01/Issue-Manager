@@ -1,8 +1,6 @@
 package edu.ncsu.csc216.issue_manager.model.manager;
 
-import java.io.FileNotFoundException;
 
-import java.util.ArrayList;
 
 import edu.ncsu.csc216.issue_manager.model.command.Command;
 import edu.ncsu.csc216.issue_manager.model.io.IssueReader;
@@ -37,7 +35,6 @@ public class IssueManager {
 	 * Creates a new issue list
 	 */
 	public void createNewIssueList() {
-		System.out.println("create");
 		issueList = new IssueList();
 	}
 	/**

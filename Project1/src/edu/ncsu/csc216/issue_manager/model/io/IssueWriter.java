@@ -20,7 +20,6 @@ public class IssueWriter {
 	public static void writeIssuesToFile(String fileName, List<Issue> issueList) {
 		
 		try {
-			System.out.println(fileName);
 			PrintStream fileWriter = new PrintStream(new File(fileName));
 			
 			for (Issue i : issueList) {

@@ -27,7 +27,7 @@ public class IssueReader {
  	    while (fileReader.hasNextLine()) { 
  	       text = text + fileReader.nextLine() + '\n';
  	    }
- 	   
+ 	    text = text.substring(0,text.length()-1);
  	    Scanner issueDelimeter = new Scanner(text).useDelimiter("\\r?\\n?[*]");
  	    while(issueDelimeter.hasNextLine()) {
  	    	String issueLine = issueDelimeter.next();

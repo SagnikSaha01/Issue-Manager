@@ -105,10 +105,13 @@ public class IssueList {
 	 * @param index the id of the issue that is being removed
 	 */
 	public void deleteIssueById(int index) {
-		for(Issue i : issues) {
-			if(i.getIssueId() == index) {
-				issues.remove(i);
+		if(index < issues.size() && index > -1) {
+			for(Issue i : issues) {
+				if(i.getIssueId() == index) {
+					issues.remove(i);
+				}
 			}
 		}
+		
 	}
 }
