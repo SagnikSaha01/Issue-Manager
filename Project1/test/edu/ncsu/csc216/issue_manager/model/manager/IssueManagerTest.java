@@ -38,7 +38,7 @@ public class IssueManagerTest {
 		manager = new IssueManager();
 		manager.addIssueToList(IssueType.BUG, "summary", "note");
 		manager.deleteIssueById(1);
-		assertEquals(0,manager.getIssueListAsArray().length);
+		assertEquals(0, manager.getIssueListAsArray().length);
 		
 				
 	}
