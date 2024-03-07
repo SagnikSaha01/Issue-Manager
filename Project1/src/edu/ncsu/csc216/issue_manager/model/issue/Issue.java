@@ -82,10 +82,8 @@ public class Issue {
 	 * @param notes any additional notes for the issue
 	 */
 	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
-		if(state.equals(WORKING_NAME) || state.equals(VERIFYING_NAME)) {
-			if(owner == null || owner.length() == 0) {
-				 throw new IllegalArgumentException("Issue cannot be created.");
-			}
+		if((state.equals(WORKING_NAME) || state.equals(VERIFYING_NAME)) && (owner == null || owner.length() == 0)) {
+			 throw new IllegalArgumentException("Issue cannot be created.");
 		}
 		if(state.equals(VERIFYING_NAME) && (resolution == null || resolution.length() == 0) ) {
 			 throw new IllegalArgumentException("Issue cannot be created.");

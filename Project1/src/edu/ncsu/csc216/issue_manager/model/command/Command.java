@@ -30,7 +30,7 @@ public class Command {
 		if(c == null) {
 			throw new IllegalArgumentException("Invalid information.");
 		}
-		if((c == CommandValue.ASSIGN) && (ownerId == null || ownerId.length() == 0)) {
+		if(c == CommandValue.ASSIGN && (ownerId == null || ownerId.length() == 0)) {
 			throw new IllegalArgumentException("Invalid information.");
 		}
 		if(c == CommandValue.RESOLVE && r == null) {

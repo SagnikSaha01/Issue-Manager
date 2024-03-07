@@ -83,6 +83,7 @@ public class IssueTest {
 		assertEquals(e.getMessage(), "Issue cannot be created.");
 		
 		
+		
 	}
 	/**
 	 * Tests transitions between states
@@ -135,6 +136,11 @@ public class IssueTest {
 		exampleIssue = new Issue(1, Issue.CLOSED_NAME, Issue.I_ENHANCEMENT, "Example bug", "owner", false, Command.R_DUPLICATE, notes);
 		exampleIssue.update(exampleCommand);
 		assertEquals(Issue.WORKING_NAME, exampleIssue.getStateName());
+		
+		exampleCommand = new Command(CommandValue.RESOLVE, "", Resolution.WONTFIX, "example note");
+		exampleIssue = new Issue(1, Issue.CLOSED_NAME, Issue.I_ENHANCEMENT, "Example bug", "", false, Command.R_DUPLICATE, notes);
+		exampleIssue.update(exampleCommand);
+		assertEquals(Issue.NEW_NAME, exampleIssue.getStateName());
 		
 		exampleCommand = new Command(CommandValue.ASSIGN, "owner", Resolution.DUPLICATE, "example note");
 		exampleIssue = new Issue(1, Issue.CONFIRMED_NAME, Issue.I_BUG, "Example bug", "owner", false, "", notes);
