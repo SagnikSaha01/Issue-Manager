@@ -15,7 +15,7 @@ public class IssueManagerTest {
 	 */
 	@Test
 	public void testIssueManager() {
-		IssueManager manager = new IssueManager();
+		IssueManager manager = IssueManager.getInstance();
 		
 		manager.loadIssuesFromFile("test-files/issue1.txt");
 		
@@ -37,6 +37,9 @@ public class IssueManagerTest {
 
 		manager = new IssueManager();
 		manager.addIssueToList(IssueType.BUG, "summary", "note");
+		manager.deleteIssueById(1);
+		assertEquals(0,manager.getIssueListAsArray().length);
+		
 				
 	}
 	
