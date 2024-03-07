@@ -10,6 +10,7 @@ import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
  * Class responsible for managing the list of issues
  */
 public class IssueList {
+	/** List for storing multiple issues */
 	private List<Issue> issues;
 	/** Tracks what the next IssueId should be */
 	private int counter;
@@ -29,7 +30,7 @@ public class IssueList {
 	 */
 	public int addIssue(IssueType issueType, String summary, String note) {
 		Issue current = new Issue(counter, issueType, summary, note);
-		issues.add(current);
+		addIssue(current);
 		counter++;
 		return current.getIssueId();
 	}
@@ -58,6 +59,7 @@ public class IssueList {
 	}
 	/**
 	 * Helps check for any duplicate issues that are already added
+	 * @param i issue to be added
 	 */
 	private void addIssue(Issue i) {
 		issues.add(i);
@@ -119,13 +121,12 @@ public class IssueList {
 	 * @param index the id of the issue that is being removed
 	 */
 	public void deleteIssueById(int index) {
-		if(index < issues.size() && index > -1) {
+		
 			for(int i = 0; i < issues.size(); i++) {
 				if(issues.get(i).getIssueId() == index) {
 					issues.remove(i);
 				}
 			}
-		}
 		
 	}
 }

@@ -9,14 +9,15 @@ import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
  * Class for managing and modifying Issue objects 
  */
 public class Issue {
+	/** Represents the new state*/
 	private NewState newState = new NewState();
-	
+	/** Represents the confirmed state */
 	private ConfirmedState confirmedState = new ConfirmedState();
-	
+	/** Represents the closed state */
 	private ClosedState closedState = new ClosedState();
-	
+	/** Represents the verifying state */
 	private VerifyingState verifyingState = new VerifyingState();
-	
+	/** Represents the working state */
 	private WorkingState workingState = new WorkingState();
 	/** Constant for the closed state */
 	public static final String CLOSED_NAME = "Closed";
@@ -42,11 +43,11 @@ public class Issue {
 	private boolean confirmed;
 	/** List of notes in an array list */
 	private ArrayList<String> notes;
-	
+	/** Whether the current issue is a bug or enhancement */
 	private IssueType issueType;
-	
+	/** State that the current issue is in */
 	private IssueState state;
-	
+	/** Resolution of the current issue */
 	private Resolution resolution;
 	
 	/**

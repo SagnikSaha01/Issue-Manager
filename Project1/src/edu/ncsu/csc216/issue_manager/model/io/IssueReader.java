@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.issue_manager.model.io;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,12 +27,13 @@ public class IssueReader {
  	       text = text + fileReader.nextLine() + '\n';
  	    }
  	    text = text.substring(0, text.length() - 1);
- 	    Scanner issueDelimeter = new Scanner(text).useDelimiter("\\r?\\n?[*]");
+ 	    try(Scanner issueDelimeter = new Scanner(text).useDelimiter("\\r?\\n?[*]")) {
  	    while(issueDelimeter.hasNextLine()) {
  	    	String issueLine = issueDelimeter.next();
  	    	issues.add(processIssue(issueLine));
  	    }
- 	    issueDelimeter.close();
+ 	    	issueDelimeter.close();
+ 	    }
  	    return issues;
 	}
 	/**
@@ -45,23 +45,28 @@ public class IssueReader {
     	if(line.substring(0, 1).equals("-")) {
     		throw new IllegalArgumentException("Issue cannot be created.");
     	}
-    	Scanner in = new Scanner(line).useDelimiter("\r?\n?[-]");
+    	Issue newIssue;
+    	try(Scanner in = new Scanner(line).useDelimiter("\r?\n?[-]");) {
+    	
     	String issueObject = in.next();
-    	Scanner issueParse = new Scanner(issueObject).useDelimiter(",");
-    	ArrayList<String> data = new ArrayList<>();
-		while(issueParse.hasNext()) {
-			data.add(issueParse.next());
+    	try (Scanner issueParse = new Scanner(issueObject).useDelimiter(",")) {
+			ArrayList<String> data = new ArrayList<>();
+			while(issueParse.hasNext()) {
+				data.add(issueParse.next());
+			}
+			if(data.size() == 6) {
+				data.add("");
+			}
+			ArrayList<String> notes = new ArrayList<>();
+			while(in.hasNext()) {
+				notes.add(in.next());
+			}
+			newIssue = new Issue(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), data.get(4), Boolean.parseBoolean(data.get(5)), data.get(6), notes);
+			issueParse.close();
+			} finally {
+				in.close();
+			}
 		}
-		if(data.size() == 6) {
-			data.add("");
-		}
-		ArrayList<String> notes = new ArrayList<>();
-		while(in.hasNext()) {
-			notes.add(in.next());
-		}
-		Issue newIssue = new Issue(Integer.parseInt(data.get(0)), data.get(1), data.get(2), data.get(3), data.get(4), Boolean.parseBoolean(data.get(5)), data.get(6), notes);
-		issueParse.close();
-		in.close();
     	return newIssue;
     }
 }

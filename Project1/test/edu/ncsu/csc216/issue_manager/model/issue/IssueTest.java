@@ -15,6 +15,9 @@ import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
  * Tests the Issue class
  */
 public class IssueTest {
+	/**
+	 * Tests the creation of valid issue objects
+	 */
 	@Test
 	public void testValidIssue() {
 		ArrayList<String> notes = new ArrayList<String>();
@@ -51,7 +54,6 @@ public class IssueTest {
 		
 		ArrayList<String> notes = new ArrayList<String>();
 		notes.add("Example note 1");
-		Issue exampleIssue = new Issue(1, Issue.CONFIRMED_NAME, Issue.I_BUG, "Example bug", "owner", true, "", notes);
 		Exception e = assertThrows(IllegalArgumentException.class,
 					() -> new Issue(1, Issue.WORKING_NAME, Issue.I_BUG, "Example bug", "", true, Command.R_WORKSFORME, notes));
 		assertEquals(e.getMessage(), "Issue cannot be created.");	
@@ -82,7 +84,9 @@ public class IssueTest {
 		
 		
 	}
-	
+	/**
+	 * Tests transitions between states
+	 */
 	@Test
 	public void testTransitions() {
 		ArrayList<String> notes = new ArrayList<String>();

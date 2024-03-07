@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ncsu.csc216.issue_manager.model.command.Command;
+import edu.ncsu.csc216.issue_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.issue_manager.model.command.Command.Resolution;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue;
 import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
 
@@ -28,6 +31,10 @@ public class IssueListTest {
 		
 		assertEquals(1, list.getIssuesByType(Issue.I_BUG).size());
 		assertEquals(0, list.getIssuesByType(Issue.I_ENHANCEMENT).size());
+		Command c = new Command(CommandValue.RESOLVE, "owner", Resolution.DUPLICATE, "Note for command");
+		list.executeCommand(1, c);
+		list.deleteIssueById(1);
+		assertEquals(0, list.getIssues().size());
 	}
 	
 	

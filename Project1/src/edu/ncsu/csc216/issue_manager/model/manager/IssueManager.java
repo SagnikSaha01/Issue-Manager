@@ -13,11 +13,13 @@ import edu.ncsu.csc216.issue_manager.model.issue.Issue.IssueType;
  * Class responsible for managing issues
  */
 public class IssueManager {
-	
+	/**
+	 * Instance of issueList to store, add, and delete issues
+	 */
 	private IssueList issueList;
-	
+	/** Instance of IssueManager */
 	private static IssueManager singleton;
-	
+	/** Constructor for the issueManager class */
 	public IssueManager() {
 		createNewIssueList();
 	}
