@@ -56,6 +56,7 @@ public class Issue {
 	 * @param issueType whether it is a bug or enhancement
 	 * @param summary summary of the issue
 	 * @param note any notes associated with the issue
+	 * @throws IllegalArgumentException if the issue is not valid
 	 */
 	public Issue(int issueId, IssueType issueType, String summary, String note) {
 		setIssueId(issueId);
@@ -80,6 +81,7 @@ public class Issue {
 	 * @param confirmed if the issue was confirmed or not
 	 * @param resolution resolution state of the issue
 	 * @param notes any additional notes for the issue
+	 * @throws IllegalArgumentException if the issue is invalid 
 	 */
 	public Issue(int issueId, String state, String issueType, String summary, String owner, boolean confirmed, String resolution, ArrayList<String> notes) {
 		if((state.equals(WORKING_NAME) || state.equals(VERIFYING_NAME)) && (owner == null || owner.length() == 0)) {
@@ -130,6 +132,7 @@ public class Issue {
 	/**
 	 * Sets the Id of the issue
 	 * @param issueId the issueId to set
+	 * @throws IllegalArgumentException if the id of the issue is invalid
 	 */
 	private void setIssueId(int issueId) {
 		if(issueId < 1) {
@@ -140,6 +143,7 @@ public class Issue {
 	/**
 	 * Sets the state of the issue
 	 * @param state the state to be set
+	 * @throws IllegalArgumentException if the state parameter is not a valid state
 	 */
 	private void setState(String state) {
 		if(state.equals(CLOSED_NAME)) {
@@ -159,6 +163,7 @@ public class Issue {
 	/**
 	 * Sets the type of issue
 	 * @param issueType the type of issue to be set
+	 * @throws IllegalArgumentException if the issueType is not a bug or enhancement
 	 */
 	private void setIssueType(String issueType) {
 		 if(issueType.equals(I_ENHANCEMENT)) {
@@ -179,6 +184,7 @@ public class Issue {
 	/**
 	 * Sets the resolution of the issue
 	 * @param resolution the resolution to be set
+	 * @throws IllegalArgumentException if the resolution is not fixed, duplicate, wontfix, or worksforme
 	 */
 	private void setResolution(String resolution) {
 		if(resolution.length() == 0) {
@@ -205,7 +211,8 @@ public class Issue {
 
 	/**
 	 * Sets the summary of the issue
-	 * @param summary the summary to set
+	 * @param summary the summary to 
+	 * @throws IllegalArgumentException if the summary is null or empty
 	 */
 	private void setSummary(String summary) {
 		if(summary == null || summary.length() == 0) {
@@ -247,7 +254,8 @@ public class Issue {
 
 	/**
 	 * Sets the notes to the issue
-	 * @param notes the notes to set
+	 * @param notes the arrayList of notes to be associated with the issue
+	 * @throws IllegalArgumentException if the arrayList of notes is null or empty
 	 */
 	private void setNotes(ArrayList<String> notes) {
 		if(notes == null || notes.size() == 0) {
@@ -317,6 +325,11 @@ public class Issue {
 	public void update(Command c) {
 		state.updateState(c);
 	}
+	/**
+	 * Adds notes to the arrayList of notes
+	 * @param note to be added to the notes arrayList
+	 * @throws IllegalArgumentException if the note is null or empty
+	 */
 	private void addNote(String note) {
 		if(note == null || note.length() == 0) {
 			throw new IllegalArgumentException("Issue cannot be created.");
@@ -378,6 +391,7 @@ public class Issue {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
+			 * @throws UnsupportedOperationException if the transition between states is not valid
 			 */
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.VERIFY)) {
@@ -398,7 +412,6 @@ public class Issue {
 			 * @return state name
 			 */
 			public String getStateName() {
-				// TODO Auto-generated method stub
 				return VERIFYING_NAME;
 			}
 		}
@@ -409,6 +422,7 @@ public class Issue {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
+			 * @throws UnsupportedOperationException if the transition between states is not valid
 			 */
 			public void updateState(Command c) {
 				if(c.getResolution() == null) {
@@ -438,7 +452,6 @@ public class Issue {
 			 * @return state name
 			 */
 			public String getStateName() {
-				// TODO Auto-generated method stub
 				return WORKING_NAME;
 			}
 
@@ -450,6 +463,7 @@ public class Issue {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
+			 * @throws UnsupportedOperationException if the transition between states is not valid
 			 */
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.ASSIGN) && issueType.equals(IssueType.ENHANCEMENT)) {
@@ -492,6 +506,7 @@ public class Issue {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
+			 * @throws UnsupportedOperationException if the transition between states is not valid
 			 */
 
 			public void updateState(Command c) {
@@ -515,7 +530,6 @@ public class Issue {
 			 * @return state name
 			 */
 			public String getStateName() {
-				// TODO Auto-generated method stub
 				return CONFIRMED_NAME;
 			}
 		}
@@ -526,6 +540,7 @@ public class Issue {
 			/**
 			 * Updates the current state based on given command
 			 * @param c command that is responsible for updating the state
+			 * @throws UnsupportedOperationException if the transition between states is not valid
 			 */
 			public void updateState(Command c) {
 				if(c.getCommand().equals(CommandValue.REOPEN)) {
@@ -567,7 +582,6 @@ public class Issue {
 			 * @return state name
 			 */
 			public String getStateName() {
-				// TODO Auto-generated method stub
 				return CLOSED_NAME;
 			}
 		}

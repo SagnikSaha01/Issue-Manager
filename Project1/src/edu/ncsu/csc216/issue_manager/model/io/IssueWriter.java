@@ -14,6 +14,7 @@ public class IssueWriter {
 	 * Writes a list of issues and saves it onto a file
 	 * @param fileName name of the file that stores the data
 	 * @param issueList list of the issues that will be saved
+	 * @throws IllegalArgumentException if the file does not exist
 	 */
 	public static void writeIssuesToFile(String fileName, List<Issue> issueList) {
 			PrintStream fileWriter;

@@ -88,6 +88,7 @@ public class IssueList {
 	 * Returns a list of issues of a certain type
 	 * @param issueType the type of issue  
 	 * @return list of issues that are only the given type
+	 * @throws IllegalArgumentException if the issueType is not a bug or enhancement
 	 */
 	public List<Issue> getIssuesByType(String issueType){
 		if(issueType == Issue.I_BUG || issueType == Issue.I_ENHANCEMENT) {

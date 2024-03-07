@@ -40,6 +40,7 @@ public class IssueReader {
 	 * Processes the issues from the file
 	 * @param line the line from which issues will be processed
 	 * @return the issue that is processed
+	 * @throws IllegalArgumentException if the input in the file is not valid
 	 */
     private static Issue processIssue(String line) throws IllegalArgumentException{
     	if(line.substring(0, 1).equals("-")) {

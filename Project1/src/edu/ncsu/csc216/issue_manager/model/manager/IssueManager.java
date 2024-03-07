@@ -26,6 +26,7 @@ public class IssueManager {
 	/**
 	 * Loads the issues from a file
 	 * @param fileName name of the file to read data 
+	 * @throws IllegalArgumentException if the fileName is not valid
 	 */
 	public void loadIssuesFromFile(String fileName) {
 		try {

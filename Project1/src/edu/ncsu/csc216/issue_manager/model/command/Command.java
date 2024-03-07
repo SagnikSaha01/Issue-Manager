@@ -25,6 +25,7 @@ public class Command {
 	 * @param ownerId the id of the owner
 	 * @param r resolution state of the issue
 	 * @param note note associated with the issue
+	 * @throws IllegalArgumentException if the command is invalid
 	 */
 	public Command(CommandValue c, String ownerId, Resolution r, String note) {
 		if(c == null) {
