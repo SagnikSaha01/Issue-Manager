@@ -588,7 +588,12 @@ public class Issue {
 		/**
 		 * Represents the constant values for the types of issues
 		 */
-		public enum IssueType { ENHANCEMENT, BUG }
+		public enum IssueType { 
+			/**Represents the enhancement issue type */
+			ENHANCEMENT, 
+			/**Represents the bug issue type */
+			BUG 
+		}
 		
 
 		

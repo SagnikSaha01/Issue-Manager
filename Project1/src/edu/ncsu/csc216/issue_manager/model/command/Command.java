@@ -76,10 +76,30 @@ public class Command {
 	/**
 	 * Represents the constants for the Issue states
 	 */
-	public enum Resolution { FIXED, DUPLICATE, WONTFIX, WORKSFORME }
+	public enum Resolution {
+		/** Represents the fixed resolution for an issue */
+		FIXED, 
+		/** Represents the duplicate resolution for an issue */
+		DUPLICATE, 
+		/** Represents the wontfix resolution for an issue */
+		WONTFIX, 
+		/** Represents the worksforme resolution for an issue */
+		WORKSFORME 
+	}
 	/**
 	 * Represents the constant values possible for Commands
 	 */
-	public enum CommandValue { ASSIGN, CONFIRM, RESOLVE, VERIFY, REOPEN }
+	public enum CommandValue { 
+		/** Represents the assign command for issue transitions */
+		ASSIGN,
+		/** Represents the confirm command for issue transitions */
+		CONFIRM, 
+		/** Represents the resolve command for issue transitions */
+		RESOLVE, 
+		/** Represents the verify command for issue transitions */
+		VERIFY, 
+		/** Represents the reopen command for issue transitions */
+		REOPEN 
+	}
 
 }
