@@ -35,7 +35,7 @@ public class IssueList {
 		return current.getIssueId();
 	}
 	/**
-	 * Adds the first issue from the collection of issues
+	 * Stores all the issues in the issue list
 	 * @param issues total collection of issues 
 	 */
 	public void addIssues(List<Issue> issues) {
